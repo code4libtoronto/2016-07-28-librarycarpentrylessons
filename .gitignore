@@ -1,0 +1,22 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE Project files #
+######################
+.idea/
+
+# Test files #
+######################
+tests/
+
+js/node_modules/
+spl.php
+/xml
+/ingest
