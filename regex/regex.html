@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<title>regex</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<hr>
+
+<p>Software/Library Carpentry - July 28-29, 2016</p>
+
+<hr>
+
+<h1 id="toc_0">Regular Expressions</h1>
+
+<h2 id="toc_1">Introduction</h2>
+
+<ul>
+<li>  A regular expression, or regex, is just a pattern that a string can match</li>
+<li><p>Conceptually this is nothing new to you - think of using truncation and wildcards in a catalogue search</p>
+
+<table>
+<thead>
+<tr>
+<th>typical catalogue search</th>
+<th>rendered as regex</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>teen*</td>
+<td><code>teen[A-Za-z]*</code></td>
+</tr>
+<tr>
+<td>wom?n</td>
+<td><code>wom.n</code> or <code>wom[a-zA-Z]n</code></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Regular expressions are like &quot;<a href="http://www.regular-expressions.info/">wildcards on steroids</a>&quot;!!</p></li>
+<li><p>Warning: regex notation is ugly! This is because we&#39;re writing patterns to match strings, but we&#39;re writing those patterns <em>as</em> strings...using only the symbols on the keyboard (instead of inventing new symbols the way mathematicians do)</p></li>
+</ul>
+
+<h2 id="toc_2">Scenario</h2>
+
+<p>You&#39;re working with a researcher who needs to locate information within a dataset she has collected. The researcher&#39;s data has been transcribed from field notebooks. Data was collected by a number of different grad students, and consists of site names, dates, and instrument readings. </p>
+
+<p>Each grad student&#39;s field notebook is saved as its own data file. There is little consistency between files, because each grad student recorded their information differently. Let&#39;s take a look:</p>
+
+<p><img src="img/notebook1.png" width="450"></p>
+
+<p>Notebook 1 uses a single tab between each column as a separator. There are also spaces in the site names. The dates are written in the international standard format.</p>
+
+<p><img src="img/notebook2.png" width="400"></p>
+
+<p>Notebook 2 uses slashes as separators, and there are no spaces in the site names. Dates are in a non-standard format.</p>
+
+<h2 id="toc_3">Practice</h2>
+
+<ul>
+<li>We will test our regular expressions using <a href="https://regex101.com">Regex101</a></li>
+<li>We need some data to search through. From the scenario above, let&#39;s assume that we&#39;ve loaded all the data from notebook 1 and notebook 2 into one file for our analysis: <a href="data/sample_data.txt">Download the sample data</a></li>
+<li>Open the sample data file, copy the contents, and paste it into the &quot;Test String&quot; box in Regex101</li>
+</ul>
+
+<h2 id="toc_4">Basics</h2>
+
+<h3 id="toc_5">Characters</h3>
+
+<ul>
+<li>The core aspect of a regular expression is a set of one or more characters of text. Try putting a single character of text into the &quot;Regular Expression&quot; box on Regex101, for example: <code>a</code></li>
+<li>The matched text will be highlighted in the &quot;Test String&quot; box</li>
+<li>The &quot;Explanation&quot; box tells you what the expression is doing</li>
+<li>Try a few other expressions, for example: <code>Baker</code>, <code>baker</code>, <code>24</code>,<code>04</code>, etc.</li>
+</ul>
+
+<h3 id="toc_6">Modifiers</h3>
+
+<ul>
+<li>You likely noticed that your expressions in the previous section matched only the first occurance of that text, and that they were case sensitive. We can use modifiers to change this default behaviour.</li>
+<li>In Regex101 we add modifiers to the second box after the slash. Click on the question mark in that box and have a look at the help pop-up. </li>
+<li>For now, let&#39;s use the <code>g</code> modifier. Optional: use the <code>i</code> modifier as well.</li>
+<li>Note: when using regex with a programming language, the syntax for this may differ. </li>
+</ul>
+
+<h3 id="toc_7">Metacharacters &amp; operators</h3>
+
+<p>There are certain characters that have special meaning in regular expressions, these are <code>\</code>, <code>|</code>, <code>(</code> <code>)</code> <code>.</code> <code>[</code> <code>]</code> <code>*</code> <code>+</code> <code>?</code> <code>{</code> <code>}</code> <code>^</code> <code>$</code>.</p>
+
+<p>These are used in combination with text characters to construct regular expressions.</p>
+
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>\</td>
+<td>Escape character - use when you need to include a metacharacter as a literal in a regular expression e.g. <code>\.txt</code></td>
+</tr>
+<tr>
+<td>|</td>
+<td>OR (alternation) e.g. <code>wom[a|e]n</code></td>
+</tr>
+<tr>
+<td>( )</td>
+<td>Group e.g. <code>(....)-(..)-(..)</code> for a date</td>
+</tr>
+<tr>
+<td>.</td>
+<td>Match any single character  e.g. <code>wom.n</code></td>
+</tr>
+<tr>
+<td>[abc]</td>
+<td>Match any of a, b, or c. e.g. <code>[btr]ent</code></td>
+</tr>
+<tr>
+<td>[a-c]</td>
+<td>Match any character between a and c. e.g. <code>[a-z]ent</code></td>
+</tr>
+<tr>
+<td>*</td>
+<td>The preceding item will be matched zero or more times e.g. <code>teen[a-z]*</code></td>
+</tr>
+<tr>
+<td>+</td>
+<td>The preceding item will be matched one or more times <code>organi.+</code></td>
+</tr>
+<tr>
+<td>?</td>
+<td>The preceding item is optional and will be matched once at most, e.g. <code>colo?r</code> Used to make a quantifier &#39;lazy&#39;, e.g. <code>.+?</code></td>
+</tr>
+<tr>
+<td>{N}</td>
+<td>The preceding item is matched exactly N times  <code>[0-9]{4}</code></td>
+</tr>
+<tr>
+<td>{N,}</td>
+<td>The preceding item is matched N or more times  <code>[0-9]{4,}</code></td>
+</tr>
+<tr>
+<td>{N,M}</td>
+<td>The preceding item is matched at least N times, but not more than M times <code>[0-9]{4,6]</code></td>
+</tr>
+<tr>
+<td>^</td>
+<td>Anchor: matches only at the start of the string e.g. <code>^b</code>  When used within a character set, negates the set, i.e. matches all characters <em>not</em> in the set - e.g. <code>[^abc]</code></td>
+</tr>
+<tr>
+<td>$</td>
+<td>Anchor: matches only at the end of the string e.g. <code>b$</code></td>
+</tr>
+<tr>
+<td>\b</td>
+<td>Anchor: matches at &quot;word boundary&quot; (zero length position), i.e. transition from word to non-word characters. This allows you to perform &quot;whole word only&quot; searchers e.g. <code>\bword\b</code></td>
+</tr>
+<tr>
+<td>\w</td>
+<td>Shorthand character class: &quot;word&quot;. Marches all the ASCII characters [A-Za-z0-9_]</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>Shorthand character class: &quot;whitespace&quot;. Matches non-word characters including space, tab, line break or form feed.</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_8">Building your first expressions</h3>
+
+<ul>
+<li>You want to find data from the month of June or July: <code>06|07</code> or <code>0(6|7)</code> (notice that when using the grouping operator, some information appears in the &quot;Match&quot; box in Regex101)<br></li>
+<li>You want to find data from the month of May. What problem do you notice if you use the regex <code>05</code>? We need to take advantage of context. Try <code>-05-</code> instead.</li>
+<li>You want to match all dates that are in the international standard format: <code>....-..-..</code>  Another option is to use <code>(....)-(..)-(..)</code> which creates three groups, one for year, one for month, and one for day. This is handy when programmatically extracting data using regex</li>
+</ul>
+
+<h2 id="toc_9">Quantifiers</h2>
+
+<p>Let&#39;s work through a more involved example that introduces a number of operators that fall under the category of &quot;quantifiers&quot;. Quantifiers specify how many instances of a character, group, or character set must be present (we&#39;ll talk about what a character set is later).</p>
+
+<p>It was straightforward to match all the standardized dates, but what about matching all the dates that are in the unstandardized text format? Let&#39;s break this task into steps:</p>
+
+<ol>
+<li>First of all, try to match a <code>/</code> using Regex101. It won&#39;t let you do it, because the regex syntax requires this character to mark the beginning and the end of the expression. You need to escape the slash character. Try <code>\/</code>. </li>
+<li>Now we want to match all the text between two slashes. We don&#39;t know exactly how many characters there are, because the month and days have variable number of characters in them. We can use the <code>*</code> character to match zero or more more characters: <code>\/(.*)\/</code> The parentheses pull the actual date text out into a group.</li>
+<li>But, there&#39;s still a problem with this. Notice that there was a match on the final row where there is no data, only the slashes with no date between. Instead let&#39;s use the <code>+</code> character, which matches one or more characters: <code>\/(.+)\/</code></li>
+<li>Now we&#39;re getting somewhere. But let&#39;s try to break out the parts of the date, like we did for the nice standardized dates. <code>\/(.+) (.+), (.+)\/</code></li>
+<li>Nearly there, but one date didn&#39;t match! It doesn&#39;t fit the pattern of the rest of the dates; there is no comma after the day. We can fix this by putting a <code>?</code> after the comma, making it optional: <code>\/(.+) (.+),? (.+)\/</code></li>
+<li>If you have keen eyes, you may have noticed there are a few typos in this dataset. For example, one line has the year &#39;201&#39;. Let&#39;s force the year part of the pattern to have four digits. One way to do this would be: <code>\/(.+) (.+),? (....)\/</code>. Another option is to use curly braces, which let you specify the number of times the match must occur: <code>\/(.+) (.+),? (.{4})\/</code></li>
+<li>While we&#39;re at it, lets enforce some rules for the days as well. There should only be one or two digits in a day. Curly braces can be used to specify a range in the number of matches: <code>\/(.+) (.{1,2}),? (.{4})\/</code></li>
+<li>What about that line that is missing the day though? Why does that match? Let&#39;s pick up this example again in the section on Character Sets, below.</li>
+</ol>
+
+<h3 id="toc_10">Greedy vs lazy quantifiers</h3>
+
+<ul>
+<li><p>Quantifiers are greedy by default - they will match as much text as they possibly can. A good example is trying to match text within html or xml tags. For example copy the following text into Regex101: </p>
+
+<div><pre><code class="language-none">Extract everything &quot;within quotes&quot; from &quot;this sentence&quot;.</code></pre></div></li>
+<li><p>Using <code>&quot;.+&quot;</code> matches the entire text from the first quotation mark to the second. Use the question mark to make the expression lazy instead: <code>&quot;.+?&quot;</code> </p></li>
+<li><p>Another solution would be to require the expression to match anything that is not a quotation mark, using <code>^</code>. For example, <code>&quot;[^&quot;]+&quot;</code> will match characters that are not quotation marks, and therefore will stop matching each time it gets to an ending quotation mark.</p></li>
+<li><p>Use grouping to pull out the text within the quotation marks: <code>&quot;(.+?)&quot;</code></p></li>
+</ul>
+
+<h2 id="toc_11">Character sets</h2>
+
+<p>Character sets, or character classes, allow you to match only one out of several characters. Place the characters you want to match between square brackets.</p>
+
+<p>In order to illustrate the use of character sets, lets return to our problem of extracting non-standardized dates from text strings. </p>
+
+<ul>
+<li>We last used the expression <code>\/(.+) (.{1,2}),? (.{4})\/</code>. Why did this pattern match the date that is missing a day? (i.e. &quot;Jan , 2009&quot;)</li>
+<li>We can see from the coloured highlighting of the three groups in Regex101 that the 2nd group, which is supposed to match the day, is actually matching the comma. This is because the comma fits the criteria for this group - it comes after the first space, consists of one or two characters. Then the <code>,?</code> which is supposed to match the comma simply matches nothing, because it is optional. We need to force the 2nd group to match only numbers, not other characters like commas. </li>
+<li>We can do this by replacing <code>.</code> (any one character) with a character set specifying only numbers: <code>[0-9]</code> (any one number between 0 and 9). So now we have <code>\/(.+) ([0-9]{1,2}),? (.{4})\/</code></li>
+<li>We can use the same technique to make our month matching more precise as well. We know that our months should begin with an upper case letter followed by some unknown number of lower case letters. A single upper case letter can be expressed as a character set <code>[A-Z]</code> and one or more lower case letters can be expressed as <code>[a-z]+</code>. </li>
+<li>And, we can use this technique to ensure that our expression matches only years that consist of four number characters.</li>
+<li>Our final regex has expanded to: <code>\/([A-Z][a-z]+) ([0-9]{1,2}),? ([0-9]{4})\/</code>. Quite a monster, but it does the trick!</li>
+</ul>
+
+<h2 id="toc_12">Anchors</h2>
+
+<p>Instead of matching characters, anchors match positions: the beginning or end of a string, or the boundaries between word and non-word characters. For example, copy the following text into Regex101:</p>
+
+<div><pre><code class="language-none">the first instance of the word &#39;the&#39;</code></pre></div>
+
+<p>The simple regex <code>the</code> makes 3 matches. Use <code>^the</code> instead to match only the one at the beginning of the string.</p>
+
+<p>Now, replace the test string in Regex101 with this one:</p>
+
+<div><pre><code class="language-none">the word &#39;end&#39; could be in the middle of the string or at the end</code></pre></div>
+
+<p>The simple regex <code>end</code> makes 2 matches. Use <code>end$</code> instead to match only the one at the end of the string.</p>
+
+<p>Finally, replase the test string in Regex101 with this one:</p>
+
+<div><pre><code class="language-none">to help is to be helpful and helping</code></pre></div>
+
+<p>The simple rebex <code>help</code> makes 3 matches. Use <code>\bhelp\b</code> to match only the word &#39;help&#39;.</p>
+
+<h2 id="toc_13">Building regular expressions</h2>
+
+<ul>
+<li>  The right way to build up patterns is to start with something simple that matches part of the data you&#39;re working with</li>
+<li>  Test it against your data, but also test that it doesn&#39;t match things that it shouldn&#39;t, because it can be very hard to track down false positives</li>
+<li>  Once you&#39;ve done that, extend it piece by piece to handle other cases</li>
+</ul>
+
+<h2 id="toc_14">Exercise</h2>
+
+<p>You are working with an archive of several thousand papers and theses writeen in LaTeX, a text-based document formatting program. The documents look like this:</p>
+
+<p><img src="img/latex.png" width="600"></p>
+
+<p>All the LaTeX formatted papers use the same labels to refer to items in a shared bibliography. These citations have certain characteristics:</p>
+
+<ul>
+<li>Citations are written using &#39;\cite{}&#39;, with a reference ID stored within the curly braces. </li>
+<li>Reference IDs contain a combination of letters and numbers. </li>
+<li>There may be white space before or after reference IDs. </li>
+<li>The reference IDs may be split across more than one line of text, and there can be multiple citations per line. </li>
+</ul>
+
+<p>Your ultimate goal is to find out how often citations appear together, i.e. how often paper x is cited in the same document as paper y. As a first step, you need to extract the set of citation labels from each document, and that&#39;s the problem you&#39;ll tackle in this exercise. </p>
+
+<ul>
+<li><a href="data/sample_data.txt">Download the sample text</a> and paste it into Regex101.</li>
+<li>Write a regular expression that matches all of the citations in the sample text.</li>
+</ul>
+
+<p>This activity will require you to use the techniques we have practiced already, and also to explore and try out a few new ones described in the metacharacter table above, including some handy shorthand character classes such as \s.</p>
+
+<h2 id="toc_15">Regular expressions &amp; python: extracting data</h2>
+
+<ul>
+<li>It isn&#39;t really enough to just find matches using regex; you need to then extract the matched text and do things with it. This is why regex is typically used in combination with a programming language.</li>
+<li>You&#39;ll be able to put this into practice after tomorrow&#39;s Python lessons</li>
+<li><p>For now, here&#39;s a simple script to give you the idea:</p>
+
+<div><pre><code class="language-none"># read the first half-dozen data records from two files
+readings = []
+for filename in (&#39;data-1.txt&#39;, &#39;data-2.txt&#39;):
+    lines = open(filename, &#39;r&#39;).read().strip().split(&#39;\n\)
+    readings += lines[2:8]
+
+# import python regular expression library
+import re
+
+# use regex to match and print the matches
+for r in readings:
+    if re.search(&#39;/([A-Z][a-z]+) ([0-9]{1.2}),? ([0=9]{4})/&#39;, r):
+        print r</code></pre></div></li>
+</ul>
+
+<h2 id="toc_16">Thanks!</h2>
+
+<ul>
+<li>  This lesson was initially developed by Greg Wilson, and has been modified for this event by Leanne Trimble.</li>
+</ul>
+
+
+
+
+</body>
+
+</html>
