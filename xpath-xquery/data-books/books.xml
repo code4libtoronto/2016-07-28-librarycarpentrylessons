@@ -56,7 +56,10 @@
       Oberon's Legacy.</description>
    </book>
    <book id="bk106" category="NON-FICTION">
-      <author>Randall, Cynthia</author>
+      <author>
+         <name>Randall, Cynthia</name>
+         <secondaryname>Cynthie</secondaryname>
+      </author>
       <title lang='en'>Lover Birds</title>
       <genre>Romance</genre>
       <price>4.95</price>
