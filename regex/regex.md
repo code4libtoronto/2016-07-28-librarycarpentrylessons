@@ -23,11 +23,29 @@ You're working with a researcher who needs to locate information within a datase
 
 Each grad student's field notebook is saved as its own data file. There is little consistency between files, because each grad student recorded their information differently. Let's take a look:
 
-<img src="img/notebook1.png" width="450">
+Notebook 1:  
+
+> Baker 1	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2009-11-17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	1223.0  
+> Baker 1	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2010-06-24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	1122.7  
+> Baker 2	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2009-07-24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	2819.0  
+> Baker 2	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2010-08-25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	2971.6  
+> Baker 1	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2011-01-05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	1410.0  
+> Baker 2	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2010-09-04&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	4671.6  
+> ...  
+
 
 Notebook 1 uses a single tab between each column as a separator. There are also spaces in the site names. The dates are written in the international standard format.
 
-<img src="img/notebook2.png" width="400">
+Notebook 2:
+
+> Davison/May 23, 2010/1724.7  
+> Pertwee/May 24, 2010/2103.8  
+> Davison/June 19, 2010/1731.9  
+> Davison/July 6, 2010/2010.7  
+> Pertwee/Aug 4 2010/1731.3  
+> Davison/Apr 22, 201/2122.2  
+> Pertwee/Sept 3, 2010/3981.0  
+> ...
 
 Notebook 2 uses slashes as separators, and there are no spaces in the site names. Dates are in a non-standard format.
 
@@ -154,11 +172,11 @@ The simple rebex `help` makes 3 matches. Use `\bhelp\b` to match only the word '
 *   Test it against your data, but also test that it doesn't match things that it shouldn't, because it can be very hard to track down false positives
 *   Once you've done that, extend it piece by piece to handle other cases
 
-## Exercise
+## Exercise 1
 
 You are working with an archive of several thousand papers and theses writeen in LaTeX, a text-based document formatting program. The documents look like this:
 
-<img src="img/latex.png" width="600">
+> Granger's work on graphs \cite{dd-gr2007}, particularly ones obeying Snape's Inequality \cite{ snape87 } (but see \cite{quirrell89}, has opened up new lines of research. However, studies at Unseen University \cite{stibbons2008} highlight several dangers.
 
 All the LaTeX formatted papers use the same labels to refer to items in a shared bibliography. These citations have certain characteristics:
 
@@ -169,10 +187,52 @@ All the LaTeX formatted papers use the same labels to refer to items in a shared
 
 Your ultimate goal is to find out how often citations appear together, i.e. how often paper x is cited in the same document as paper y. As a first step, you need to extract the set of citation labels from each document, and that's the problem you'll tackle in this exercise. 
 
-* [Download the sample text](data/sample_data.txt) and paste it into Regex101.
-* Write a regular expression that matches all of the citations in the sample text.
+* [Download the sample text](data/exercise1_data.txt) and paste it into Regex101.
+* Write a regular expression that matches all of the citations in the sample text. Use grouping to ensure you match only the citations themselves, without any surrounding characters.
 
 This activity will require you to use the techniques we have practiced already, and also to explore and try out a few new ones described in the metacharacter table above, including some handy shorthand character classes such as \s.
+
+## Exercise 2
+
+Let's practice making matches with xml data. Imagine a simple book catalogue with the following xml elements and attributes:
+
+> \<catalog>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \<book id="bk101">  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<author>Gambardella, Matthew\</author>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<title>XML Developer's Guide\</title>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<genre>Computer\</genre>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<price>44.95\</price>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<publish\_date>2000-10-01\</publish_date>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<description>An in-depth look at creating applications with XML.  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\</description>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \</book>  
+> \</catalog>  
+
+   
+*(sample data source: [Microsoft documentation](https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx))*
+
+
+[Download the sample text](data/exercise2_data.txt) and paste it into Regex101. 
+
+Write a variety of regular expressions to match tags, attributes, and content, for example:
+
+* Match all text between angle brackets (tags)
+* Match all prices
+* Match all prices of $40 or greater
+* Match all book IDs
+* Match all book ID numbers (without the preceding 'bk')
+* Match all publication dates in 2001 or 2002
+* Match all author's last names
+* What else can you think of?
+
+As you'll soon see, our next session on XPath/XQuery will make pinpointing specific xml nodes a **lot** easier. You'll be able to use XPath to identify specific nodes and combine it with regex to select content.
+
+
+## More Practice
+
+Go through the exercises at:  
+Regex One: http://regexone.com/  
+Regex golf: http://regex.alf.nu/
 
 
 ## Regular expressions & python: extracting data
@@ -197,4 +257,4 @@ This activity will require you to use the techniques we have practiced already, 
 				
 ## Thanks!
 
-*   This lesson was initially developed by Greg Wilson, and has been modified for this event by Leanne Trimble.
+*   This [software carpentry lesson](http://v4.software-carpentry.org/regexp/index.html) was originally developed by Greg Wilson, and has been modified for this event by Leanne Trimble.

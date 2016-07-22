@@ -355,11 +355,32 @@ sup {
 
 <p>Each grad student&#39;s field notebook is saved as its own data file. There is little consistency between files, because each grad student recorded their information differently. Let&#39;s take a look:</p>
 
-<p><img src="img/notebook1.png" width="450"></p>
+<p>Notebook 1:  </p>
+
+<blockquote>
+<p>Baker 1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2009-11-17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  1223.0<br>
+Baker 1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2010-06-24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  1122.7<br>
+Baker 2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2009-07-24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2819.0<br>
+Baker 2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2010-08-25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2971.6<br>
+Baker 1   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2011-01-05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  1410.0<br>
+Baker 2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2010-09-04&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  4671.6<br>
+...  </p>
+</blockquote>
 
 <p>Notebook 1 uses a single tab between each column as a separator. There are also spaces in the site names. The dates are written in the international standard format.</p>
 
-<p><img src="img/notebook2.png" width="400"></p>
+<p>Notebook 2:</p>
+
+<blockquote>
+<p>Davison/May 23, 2010/1724.7<br>
+Pertwee/May 24, 2010/2103.8<br>
+Davison/June 19, 2010/1731.9<br>
+Davison/July 6, 2010/2010.7<br>
+Pertwee/Aug 4 2010/1731.3<br>
+Davison/Apr 22, 201/2122.2<br>
+Pertwee/Sept 3, 2010/3981.0<br>
+...</p>
+</blockquote>
 
 <p>Notebook 2 uses slashes as separators, and there are no spaces in the site names. Dates are in a non-standard format.</p>
 
@@ -556,11 +577,13 @@ sup {
 <li>  Once you&#39;ve done that, extend it piece by piece to handle other cases</li>
 </ul>
 
-<h2 id="toc_14">Exercise</h2>
+<h2 id="toc_14">Exercise 1</h2>
 
 <p>You are working with an archive of several thousand papers and theses writeen in LaTeX, a text-based document formatting program. The documents look like this:</p>
 
-<p><img src="img/latex.png" width="600"></p>
+<blockquote>
+<p>Granger&#39;s work on graphs \cite{dd-gr2007}, particularly ones obeying Snape&#39;s Inequality \cite{ snape87 } (but see \cite{quirrell89}, has opened up new lines of research. However, studies at Unseen University \cite{stibbons2008} highlight several dangers.</p>
+</blockquote>
 
 <p>All the LaTeX formatted papers use the same labels to refer to items in a shared bibliography. These citations have certain characteristics:</p>
 
@@ -574,13 +597,56 @@ sup {
 <p>Your ultimate goal is to find out how often citations appear together, i.e. how often paper x is cited in the same document as paper y. As a first step, you need to extract the set of citation labels from each document, and that&#39;s the problem you&#39;ll tackle in this exercise. </p>
 
 <ul>
-<li><a href="data/sample_data.txt">Download the sample text</a> and paste it into Regex101.</li>
-<li>Write a regular expression that matches all of the citations in the sample text.</li>
+<li><a href="data/exercise1_data.txt">Download the sample text</a> and paste it into Regex101.</li>
+<li>Write a regular expression that matches all of the citations in the sample text. Use grouping to ensure you match only the citations themselves, without any surrounding characters.</li>
 </ul>
 
 <p>This activity will require you to use the techniques we have practiced already, and also to explore and try out a few new ones described in the metacharacter table above, including some handy shorthand character classes such as \s.</p>
 
-<h2 id="toc_15">Regular expressions &amp; python: extracting data</h2>
+<h2 id="toc_15">Exercise 2</h2>
+
+<p>Let&#39;s practice making matches with xml data. Imagine a simple book catalogue with the following xml elements and attributes:</p>
+
+<blockquote>
+<p>&lt;catalog&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &lt;book id=&quot;bk101&quot;&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &lt;author&gt;Gambardella, Matthew&lt;/author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &lt;title&gt;XML Developer&#39;s Guide&lt;/title&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &lt;genre&gt;Computer&lt;/genre&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &lt;price&gt;44.95&lt;/price&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &lt;publish_date&gt;2000-10-01&lt;/publish_date&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &lt;description&gt;An in-depth look at creating applications with XML.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/description&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &lt;/book&gt;<br>
+&lt;/catalog&gt;  </p>
+</blockquote>
+
+<p><em>(sample data source: <a href="https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx">Microsoft documentation</a>)</em></p>
+
+<p><a href="data/exercise2_data.txt">Download the sample text</a> and paste it into Regex101. </p>
+
+<p>Write a variety of regular expressions to match tags, attributes, and content, for example:</p>
+
+<ul>
+<li>Match all text between angle brackets (tags)</li>
+<li>Match all prices</li>
+<li>Match all prices of $40 or greater</li>
+<li>Match all book IDs</li>
+<li>Match all book ID numbers (without the preceding &#39;bk&#39;)</li>
+<li>Match all publication dates in 2001 or 2002</li>
+<li>Match all author&#39;s last names</li>
+<li>What else can you think of?</li>
+</ul>
+
+<p>As you&#39;ll soon see, our next session on XPath/XQuery will make pinpointing specific xml nodes a <strong>lot</strong> easier. You&#39;ll be able to use XPath to identify specific nodes and combine it with regex to select content.</p>
+
+<h2 id="toc_16">More Practice</h2>
+
+<p>Go through the exercises at:<br>
+Regex One: http://regexone.com/<br>
+Regex golf: http://regex.alf.nu/</p>
+
+<h2 id="toc_17">Regular expressions &amp; python: extracting data</h2>
 
 <ul>
 <li>It isn&#39;t really enough to just find matches using regex; you need to then extract the matched text and do things with it. This is why regex is typically used in combination with a programming language.</li>
@@ -602,10 +668,10 @@ for r in readings:
         print r</code></pre></div></li>
 </ul>
 
-<h2 id="toc_16">Thanks!</h2>
+<h2 id="toc_18">Thanks!</h2>
 
 <ul>
-<li>  This lesson was initially developed by Greg Wilson, and has been modified for this event by Leanne Trimble.</li>
+<li>  This <a href="http://v4.software-carpentry.org/regexp/index.html">software carpentry lesson</a> was originally developed by Greg Wilson, and has been modified for this event by Leanne Trimble.</li>
 </ul>
 
 
