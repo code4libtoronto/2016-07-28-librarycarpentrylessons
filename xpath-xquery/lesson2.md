@@ -38,7 +38,10 @@ Now, lets begin to use XPath.
 3. Browse to your xpath-xquery directory, click on the data-books directory then select Choose. Hit OK.
 4. Set the input bar option to XQuery and use that to enter in your XPath expressions
 
-Looking at books.xml
+BaseX is...
+other options/windows
+
+Looking at **xpath-xquery/data-books/books.xml:**
 
 ```
 <?xml version="1.0"?>
@@ -193,7 +196,7 @@ XPath represents xml as a tree data structure. Here are some common terminologie
 XPath uses path expressions to select nodes in an XML document. The node is selected by following a path or steps. XPath uses the slash to denote traversal of the structure of your document in a path, in the same way as URLs or unix directories.
 
 
-## Basic Syntax 
+## Abbreviated Syntax 
 
 In XPath, the most useful path expressions are listed below:
 
@@ -297,7 +300,7 @@ In the table below we have listed some path expressions with predicates and the 
 | ```[1]```  |Select the first element|
 | ```[last()]```  |Select the last element|
 | ```[last()-1]```  |Select the last but one element (also known as the second last element)|
-|```[position()<3]```|Select the first two elements|
+|```[position()<3]```|Select the first two elements, note the first position starts at 1, not = |
 |```[@lang]```|	Select elements that have attribute 'lang'|
 |```[@lang='en']```|	Select all the elements that have a "attribute" attribute with a value of "en"|
 |```[price>15.00]```|	Select all elements that have a price element with a value greater than 15.00|
@@ -358,7 +361,9 @@ case-sensitive
 
 Solution
 
-```//publish_date[matches(.,"-[0][1-5]-")]```
+```
+//publish_date[matches(.,"-[0][1-5]-")]
+```
 
 
 ### Exercises
@@ -372,7 +377,7 @@ Now try it with /data-menu/menu.xml
 * Is there a correlation between the amount of sugar in a food and its review rating?
 * I want to find all foods that have waffle in the title
 
-## XPath Axes
+## Complete syntax: XPath Axes
 
 XPath Axes are ....
 
@@ -491,11 +496,11 @@ update facility
 
 ## Setup
 
-Install basex: http://basex.org/products/download/
+[Install basex](http://basex.org/products/download/)
 
 Mac:
-Install a JDK: http://www.oracle.com/technetwork/java/javase/downloads/index.html
-You need to install homebrew: http://brew.sh/
+[Install a JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+You need to install [homebrew](http://brew.sh/)
 Once that's installed, run
 ```brew install basex```
 
@@ -506,11 +511,13 @@ In your terminal, run
 
 ```$ basexgui```
 
+## Additional Resources
+[XML Path Language (XPath) W3C Recommendation](https://www.w3.org/TR/xpath/)
 
 ## Real data samples
 
-https://digital.library.yorku.ca/yul-95212/hairdressing-mr-gino-bay-beauty-salon/datastream/MODS/view
-https://digital.library.yorku.ca/yul-93087/dog-obedience-course-lawrence-plaza/datastream/MODS/view
-https://digital.library.yorku.ca/yul-233240/mariposa-festival/datastream/MODS/view
-http://digitalscholarship.utsc.utoronto.ca/projects/islandora/object/nearbystudies%3A546/datastream/MODS/view
-http://digitalscholarship.utsc.utoronto.ca/projects/islandora/object/nearbystudies%3A585/datastream/MODS/view
+[York University 1](https://digital.library.yorku.ca/yul-95212/hairdressing-mr-gino-bay-beauty-salon/datastream/MODS/view)
+[York University 2](https://digital.library.yorku.ca/yul-93087/dog-obedience-course-lawrence-plaza/datastream/MODS/view)
+[York University 3](https://digital.library.yorku.ca/yul-233240/mariposa-festival/datastream/MODS/view)
+[University of Toronto Scarborough 1](http://digitalscholarship.utsc.utoronto.ca/projects/islandora/object/nearbystudies%3A546/datastream/MODS/view)
+[University of Toronto Scarborough 2](http://digitalscholarship.utsc.utoronto.ca/projects/islandora/object/nearbystudies%3A585/datastream/MODS/view)
