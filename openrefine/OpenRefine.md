@@ -1,6 +1,37 @@
 ---
 Software/Library Carpentry - July 28-29, 2016
 ---
+## Setup
+Please look at the Installation Instructions from the OpenRefine project for more details on how to run OpenRefine on your machine. The instructions below are adapted from this [link](https://github.com/OpenRefine/OpenRefine/wiki/Installation-Instructions). We will be using version [2.6-rc2](https://github.com/OpenRefine/OpenRefine/releases/tag/2.6-rc.2) during the workshop. A [Java Runtime Environment (JRE)]('https://www.java.com/en/download/manual.jsp') is required to run OpenRefine. If the installation procedure below fails, make sure you have a working JRE installed on your computer.
+
+###Windows
+
+1. Download [OpenRefine v. 2.6-rc2 for Windows](https://github.com/OpenRefine/OpenRefine/releases/download/2.6-rc.2/openrefine-win-2.6-rc.2.zip)
+2. Once you have downloaded the .zip file, uncompress it into a folder wherever you want (such as in C:\Open-Refine).
+3. To launch OpenRefine, run the .exe file in that folder. You should see the Command window in which OpenRefine runs.
+4. To shut down OpenRefine, press Ctrl-C in the command window that is running OpenRefine. Wait until there's a message that says the shutdown is complete. That window might close automatically, or you can close it yourself. If you get asked, "Terminate all batch processes? Y/N", just press Y.
+
+###Mac OSX
+
+1. Download [OpenRefine v. 2.6-rc2 for Mac](https://github.com/OpenRefine/OpenRefine/releases/download/2.6-rc.2/openrefine-mac-2.6-rc.2.dmg)
+2. Once you have downloaded the .dmg file, open it, and drag the OpenRefine icon into the Applications folder.
+3. To launch OpenRefine, double-click the OpenRefine app. You'll see the OpenRefine app appear in your dock.
+4. If you get an error message preventing you from opening the app because it's from an unidentified developer, do the following (you only have to do it once when you open the app for the first time):
+	1. Press the ctrl (Control) key and click on the app icon
+	2. Choose Open from the shortcut menu
+	3. There should now be an Open button under the "unidentified developer" error message. Click that button to open the app.
+5. To shut down OpenRefine, right-click on its icon in the Dock and choose the Quit option.
+
+###Linux
+
+1. Download [OpenRefine v. 2.6-rc2 for Linux](https://github.com/OpenRefine/OpenRefine/releases/download/2.6-rc.2/openrefine-linux-2.6-rc.2.tar.gz)
+2. Once you have downloaded the .tar.gz file, uncompress it into a folder wherever you want.
+3. To launch OpenRefine, open a shell, navigate to that folder and type ./refine
+4. To shut down OpenRefine, press Ctrl-C in the shell that is running OpenRefine.
+
+### Running OpenRefine
+
+OpenRefine is operated from within a web browser (such as Chrome or Firefox). If your browser doesn't open automatically when you start OpenRefine (see above), navigate to [http://127.0.0.1:3333/](http://127.0.0.1:3333/) in your favourite browser to open the OpenRefine window. Please note that even though you use a browser to operate OpenRefine, it is still run locally on your machine, and not on the web. Your data never leaves your machine.
 
 ## What is OpenRefine?
 OpenRefine is described as a tool for working with ‘messy’ data - but what does this mean? It is probably easiest to describe the kinds of data OpenRefine is good at working with and the sorts of problems it can help you solve.
@@ -53,12 +84,12 @@ Some common scenarios might be:
 | Prest, Thomas Peckett           | 1810 | 1879 |
 
 ---
-#Key Points
-*OpenRefine is a 'tool for working with messy data'
-*OpenRefine works best with data in a simple tabular format
-*OpenRefine can help you split data up into more granular parts
-*OpenRefine can help you match local data up to other data sets
-*OpenRefine can help you enhance a data set with data from other sources
+###Key Points
+* OpenRefine is a 'tool for working with messy data'
+* OpenRefine works best with data in a simple tabular format
+* OpenRefine can help you split data up into more granular parts
+* OpenRefine can help you match local data up to other data sets
+* OpenRefine can help you enhance a data set with data from other sources
 ___
 
 ## Importing data
@@ -119,16 +150,17 @@ You can then drag and drop column names to re-order the columns, or remove colum
 ## Sorting data
 You can sort data in OpenRefine by clicking on the drop down menu for the column you want to sort on, and choosing 'Sort'
 
-Once you have sorted the data a new 'Sort' drop down menu will be displayed.
+Once you have sorted the data a new '**Sort**' drop down menu will be displayed at the top of the table.
 
-Unlike Excel 'Sorts' in OpenRefine are temporary - that is, if you remove the 'Sort', the data will go back to it's original 'unordered' state. The 'Sort' drop down menu lets you amend the existing sort (e.g. reverse the sort order), remove existing sorts, and make sorts permanent.
+
+Unlike Excel 'Sorts' in OpenRefine are temporary - that is, if you remove the 'Sort', the data will go back to it's original 'unordered' state. The 'Sort' drop down menu at the top of the table lets you amend the existing sort (e.g. reverse the sort order), remove existing sorts, and make sorts permanent.
 
 You can sort on multiple columns at the same time by adding another sorted column (in the same way).
 
 ## Facets
 Facets are one of the most useful features of OpenRefine and can help both get an overview of the data in a project as well as helping you bring more consistency to the data.
 
-A 'Facet' groups all the values that appear in a column, and then allows you to filter the data by these values and edit values across many records at the same time.
+A 'Facet' allows you to explore a particular dimension of a dataset. It groups all the values that appear in a column, and then allows you to filter the data by these values and edit values across many records at the same time.
 
 The simplest type of Facet is called a 'Text facet'. This simply groups all the text values in a column and lists each value with the number of records it appears in. The facet information always appears in the left hand panel in the OpenRefine interface.
 
@@ -140,22 +172,27 @@ You can include multiple values from the facet in a filter at one time by using 
 
 You can also 'invert' the filter to show all records which do not match your selected values. This option appears at the top of the Facet panel when you select a value from the facet to apply as a filter.
 
+To remove a Facet, hit the 'x' in the top left of the Facet box.
+
 ## Exercise 2: Which licences are used for articles in this file?
 * Create a facet for the 'Licence' column
 * What is the most common licence in the file?
 * How many articles in the file don't have a licence assigned?
 
-## Filters
-As well as using Facets to filter the data displayed in OpenRefine you can also apply 'Text Filters' which looks for a particular piece of text appearing in a column. Text filters are applied by clicking the drop down menu at the top of the column you want to apply the filter to and choosing 'Text filter'.
+## Amending data through facets
+If you create a text facet you can edit the values in the facet to change the value for several records at the same time. To do this, simply mouse-over the value you want to edit and click the 'edit' option that appears.
 
-As with Facets, the Filter options appear in the left hand panel in OpenRefine. Simply type in the text you want to use in the Filter to display only rows which contain that text in the relevant column.
+This approach is useful in relatively small facets where you might have small variations through punctuation or typing errors etc. For example, a column that should contain only terms from a small restricted list such as days of the week or months of the year.
 
-You can also use regular expressions in the filter.
+The list of values in the facet will update as you make edits.
 
-e.g. thera[a-z]* will create a filter that searches for variations on therapy, therapeutic, etc.
-
-## Working with filtered data
-It is very important to note that when you have filtered the data displayed in OpenRefine, any operations you carry out will apply only to the rows that match the filter - that is the data currently being displayed.
+## Exercise 3: Correct the Language values via a facet
+* Create a Text facet on the Language column
+* Notice that there is both 'EN' and 'English'
+* Put the mouse over the 'English' value
+* Click 'Edit'
+* Type 'EN' and click 'Apply'
+* See how the Language facet updates
 
 ## More on Facets
 As well as 'Text facets' Refine also supports a range of other types of facet. These include:
@@ -171,38 +208,38 @@ As well as 'Text facets' Refine also supports a range of other types of facet. T
 
 **Custom facets** are a range of different types of facets, and also allow you write your own custom facets. Some of the default custom facets are:
 
-* Word facet - this breaks down text into words and counts the number of records each word appears in
-* Duplicates facet - this results in a binary facet of 'true' or 'false'. Rows appear in the 'true' facet if the value in the selected column is an exact match for a value in the same column in another row
-* Text length facet - creates a numeric facet based on the length (number of characters) of the text in each row for the selected column. This can be useful for spotting incorrect or unusual data in a field where specific lengths are expected (e.g. if the values are expected to be years, any row with a text length more than 4 for that column is likely to be incorrect)
-* Facet by blank - a binary facet of 'true' or 'false'. Rows appear in the 'true' facet if they have no data present in that column. This is useful when looking for rows missing key data.
+* **Word facet** - this breaks down text into words and counts the number of records each word appears in
+* **Duplicates facet** - this results in a binary facet of 'true' or 'false'. Rows appear in the 'true' facet if the value in the selected column is an exact match for a value in the same column in another row
+* **Text length facet** - creates a numeric facet based on the length (number of characters) of the text in each row for the selected column. This can be useful for spotting incorrect or unusual data in a field where specific lengths are expected (e.g. if the values are expected to be years, any row with a text length more than 4 for that column is likely to be incorrect)
+* **Facet by blank** - a binary facet of 'true' or 'false'. Rows appear in the 'true' facet if they have no data present in that column. This is useful when looking for rows missing key data.
 
 Facets are intended to group together common values and OpenRefine limits the number of values allowed in a single facet to ensure the software does not perform slowly or run out of memory. If you create a facet where there are many unique values (for example, a facet on a 'book title' column in a data set that has one row per book) the facet created will be very large and may either slow down the application, or OpenRefine will not create the facet. 
 
-## Exercise 3: Find all publications without a DOI
+## Exercise 4: Find all publications without a DOI
 * Use the 'Facet by blank' function to find all publications in this data set without a DOI
 
-## Amending data through facets
-If you create a text facet you can edit the values in the facet to change the value for several records at the same time. To do this, simply mouse-over the value you want to edit and click the 'edit' option that appears.
 
-This approach is useful in relatively small facets where you might have small variations through punctuation or typing errors etc. For example, a column that should contain only terms from a small restricted list such as days of the week or months of the year.
+## Filters
+As well as using Facets to filter the data displayed in OpenRefine you can also apply 'Text Filters' which look for a particular piece of text appearing in a column. Text filters are applied by clicking the drop down menu at the top of the column you want to apply the filter to and choosing 'Text filter'.
 
-The list of values in the facet will update as you make edits.
+As with Facets, the Filter options appear in the left hand panel in OpenRefine. Simply type in the text you want to use in the Filter to display only rows which contain that text in the relevant column.
 
-## Exercise 4: Correct the Language values via a facet
-* Create a Text facet on the Language column
-* Notice that there is both 'EN' and 'English'
-* Put the mouse over the 'English' value
-* Click 'Edit'
-* Type 'EN' and click 'Apply'
-* See how the Language facet updates
+You can also use regular expressions in the filter.
 
-# Rows and Records
+e.g. thera[a-z]* will create a filter that searches for variations on therapy, therapeutic, etc.
+
+## Working with filtered data
+It is very important to note that when you have filtered the data displayed in OpenRefine, any operations you carry out will apply only to the rows that match the filter - that is the data currently being displayed.
+
+
+## Rows and Records
 OpenRefine has two modes of viewing data 'Rows' and 'Records'. So far we've been using the Rows mode, where each row represents a single record in the data set - in this case, an article. In Records mode, OpenRefine can link together multiple rows as belonging to the same Record.
 
 How this works can be seen in the next exercise...
 
 ## Exercise 5: Split author names into separate cells
 If you look at the Author column you should be able to see that there are multiple names in each cell separated by the pipe symbol "|". To work with the author names effectively we need to split them into separate cells:
+
 * Click the dropdown menu at the top of the Author column
 * Choose 'Edit cells->Split multi-valued cells'
 * In the prompt type the | symbol and click 'OK'
@@ -219,11 +256,10 @@ To use the the 'Cluster' function, click on the 'Edit Cells' menu option in the 
 
 The 'Clusters' are created automatically according to an algorithm.They look at things like character similarity, word order, nearest neighbours, phonetic similarities and more. Each algorithm weights these different elements of the text differently. There are a number of different algorithms supported by OpenRefine - some experimentation maybe required to see which clustering algorithm works best with any particular set of data, and you may find that using different algorithms highlights different clusters.
 
-For more information on the methods used to create Clusters see https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth
+For more information on the methods used to create Clusters see [https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth)
 
 For each cluster you have the option of 'merging' the values together - that is replace with a single consistent value. By default OpenRefine uses the most common value in the cluster as the new value, but you can select one of the other values by clicking the value itself, or you can simply type the desired value into the 'New Cell Value' box.
 
-The Clustering function can also be accessed via the drop down menu at the top of a column by selecting 'Edit cells->Cluster and edit …'
 
 ## Exercise 6: Use Clustering to clean up author data
 * Choose 'Edit cells->Cluster and edit' from the author column (which should be split into individual values from the last exercise)
@@ -231,15 +267,18 @@ The Clustering function can also be accessed via the drop down menu at the top o
 * Try changing the clustering method being used - which ones work well?
 
 ---
+
 ###Key Points
-*You can reorder, rename and remove columns in OpenRefine
-*You can use facets and filters to explore your data
-*You can use facets and filters work with a subset of data in OpenRefine
-*You can easily correct common data issues using Facets and Clustering
+
+* You can reorder, rename and remove columns in OpenRefine
+* You can use facets and filters to explore your data
+* You can use facets and filters work with a subset of data in OpenRefine
+* You can easily correct common data issues using Facets and Clustering
+
 ---
 ## Transforming data
 
-### Introducing Transformations
+## Introducing Transformations
 
 Through facets, filters and clusters OpenRefine offers relatively straightforward ways of getting an overview of your data, and making changes where you want to standardise terms used to a common set of values.
 
@@ -251,9 +290,9 @@ However, sometimes there will be changes you want to make to the data that canno
 
 To support this type of activity OpenRefine supports 'Transformations' which are ways of manipulating data in columns. Transformations are normally written in a special language called 'GREL' (Google Refine Expression Language). To some extent GREL expressions are similar to Excel Formula, although they tend to focus on text manipulations rather than numeric functions.
 
-Full documentation for the GREL is available at https://github.com/OpenRefine/OpenRefine/wiki/Google-refine-expression-language. This tutorial covers only a small subset of the commands available.
+Full documentation for the GREL is available at https://github.com/OpenRefine/OpenRefine/wiki/Google-refine-expression-language. For a more digestible introduction see this [cheat sheet](http://arcadiafalcone.net/GoogleRefineCheatSheets.pdf). This tutorial covers only a small subset of the commands available.
 
-### Common transformations
+## Common transformations
 Some transformations are used regularly and are accessible directly through menu options, without having to type them directly.
 
 Examples of some of these common transformations are given in the table below, with their 'GREL' equivalents. We'll see how to use the GREL version later in this lesson.
@@ -265,13 +304,15 @@ To Lowercase| Converts the current value to lowercase | ```value.toLowercase()``
 To Titlecase| Converts the current value to titlecase (i.e. each word starts with an uppercase character and all other characters are converted to lowercase) | ```value.toTitlecase()```
 Trim leading and trailing whitespace | Removes any 'whitespace' characters (e.g. spaces, tabs) from the start or end of the current value | ```value.trim()```
 
-### Exercise 7: Correct Publisher data
+## Exercise 7: Correct Publisher data
 * Create a text facet on the Publisher column
 * Note that in the values there are two that look identical - why does this value appear twice?
 * On the publisher column use the dropdown menu to select 'Edit cells->Common transforms->Trim leading and trailing whitespace'
 * Look at the publisher facet now - has it changed? (if it hasn't changed try clicking the Refresh option to make sure it updates)
 
-### Writing transformations
+---
+
+## Writing transformations
 To start writing transformations, select the column on which you wish to perform a transformation and choose 'Edit cells->Transform…'. In the screen that displays you have a place to write a transformation (the 'Expression' box) and then the ability to Preview the effect the transformation would have on 10 rows of your data.
 
 The transformation you type into the 'Expression' box has to be a valid GREL expression. The simplest expression is simply the word 'value' by itself - which simply means the value that is currently in the column - that is: make no change.
@@ -284,20 +325,15 @@ GREL functions are written by giving a value of some kind (a text string, a date
 Either is valid, and which is used is completely down to personal preference. In these notes the first syntax is used.
 
 Next to the 'Preview' option are options to view:
-* History - a list of transformations you've previously used with the option to reuse them immediately or to 'star' them for easy access
-* Starred - a list of transformations you've 'starred' via the 'History' view
-* Help - a list of all the GREL functions and brief information on how to use them
 
-### Exercise 8: Put titles into Title Case
+* **History** - a list of transformations you've previously used with the option to reuse them immediately or to 'star' them for easy access
+* **Starred** - a list of transformations you've 'starred' via the 'History' view
+* **Help** - a list of all the GREL functions and brief information on how to use them
+
+## Exercise 8: Put titles into Title Case
 * Facet by publisher
 * Select "Akshantala Enterprises" and "Society of Pharmaceutical Technocrats"
-    * To select multiple values in the facet use the 'Include' link that appears to the right of the facet
-* See that the Titles for these are all in uppercase
-* Click the dropdown menu on the Title column
-* Choose 'Edit cells->Transform...'
-* In the Expression box type ```value.toTitlecase()```
-* In the Preview note that you can see what the affect of running this will be
-* Click 'OK'
+* Change the titles from those to publishers from uppercase to title case using the GREL syntax.
 
 ## Undo and Redo
 OpenRefine lets you undo, and redo, any number of steps you have taken in cleaning the data. This means you can always try out transformations and 'undo' if you need to. The way OpenRefine records the steps you have taken even allows you to take the steps you've carried out on one data set, and apply it to another data set by a simple copy and paste operation.
@@ -335,7 +371,7 @@ Every piece of data in OpenRefine has a 'type'. The most common 'type' is a 'str
 ### Dates and Numbers
 So far we've been looking only at 'String' type data. Much of the time it is possible to treat numbers and dates as strings. For example in the Date column we have the date of publication represented as a String. However, some operations and transformations only work on 'number' or 'date' type operations. The simplest example is sorting values in numeric or date order. To carry out these functions we need to convert the values to a date or number first.
 
-### Exercise 9: Reformat the Date
+## Exercise 9: Reformat the Date
 * Make sure you remove all Facets and Filters
 * On the Date column use the dropdown menu to select 'Edit cells->Common transforms->To date'
 * Note how the values are now displayed in green and follow a standard convention for their display format (ISO8601) - this indicates they are now stored as date data types in OpenRefine. We can now carry out functions that are specific to Dates
@@ -394,7 +430,9 @@ value.split(",").sort().join(",")
 ```
 . Taking the above example again, this would result in a string with the days of the week in alphabetical order, listed with commas between each day.
 
-### Exercise 10: Reverse author names
+---
+
+## Exercise 10: Reverse author names
 In this exercise we are going to use both the Boolean and Array data types.
 If you look at the author column, you can see that most of the author names are written in the natural order. However, a few have been reversed to put the family name first.
 
@@ -419,10 +457,12 @@ To get the author name in the natural order you can reverse the array and join i
 * In the Expression box, add to the existing expression until it reads ```value.match(/(.*),(.*)/).reverse().join(" ")```
 * In the Preview view you should be able see this has reversed the array, and joined it back into a string
 * Click 'OK'
+
 ---
 ###Key Points
-*You can alter data in OpenRefine based on specific instructions
-*You can expand the data editing functions that are built-in into OpenRefine by building your own
+* You can alter data in OpenRefine based on specific instructions
+* You can expand the data editing functions that are built-in into OpenRefine by building your own
+
 ---
 
 ## Looking up data from a URL
@@ -445,7 +485,8 @@ The 'parseHtml()' function can also be used to extract data from XML.
 
 The next exercise demonstrates this two stage process in full.
 
-### Exercise 11: Retrieving journal details from CrossRef via ISSN
+---
+## Exercise 11: Retrieving journal details from CrossRef via ISSN
 Because retrieving data from external URLs takes time, this exercise targets a single line in the data. In reality you would want to run this over many rows (and probably go and do something else while it ran)
 
 * Select a single row from the data set which contains an ISSN by:
@@ -491,28 +532,31 @@ There also exist extensions to do reconciliation against local data such as csv 
 
 For more information on using Reconciliation services see [https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API](https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API)
 
-### Exercise 12: Reconcile Publisher names with VIAF IDs
+---
+## Exercise 12: Reconcile Publisher names with VIAF IDs
 In this exercise you are going to use the VIAF Reconciliation service written by [Jeff Chiu](https://twitter.com/absolutelyjeff). Jeff offers two ways of using the reconciliation service - either via a public service he runs at [http://refine.codefork.com/](http://refine.codefork.com/), or by installing and running the service locally using the instructions at [https://github.com/codeforkjeff/refine_viaf](https://github.com/codeforkjeff/refine_viaf).
 
 If you are going to do a lot of reconciliation, please install and run your own local reconciliation service - the instructions at [https://github.com/codeforkjeff/refine_viaf](https://github.com/codeforkjeff/refine_viaf) make this reasonably straightforward.
 
 Once you have chosen which service you are going to use:
+
 * In the Publisher column use the dropdown menu to choose 'Reconcile->Start Reconciling'
 * If this is the first time you've used this particular reconciliation service, you'll need to add the details of the service now
-    * Click 'Add Standard Service...' and in the dialogue that appears enter:
-        * "http://refine.codefork.com/reconcile/viaf" for Jeff's public service
-        * "http://localhost:8080/reconcile/viaf" if you are running the service locally
+* Click 'Add Standard Service...' and in the dialogue that appears enter:
+	*  "http://refine.codefork.com/reconcile/viaf" for Jeff's public service
+	* "http://localhost:8080/reconcile/viaf" if you are running the service locally
 * You should now see a heading in the list on the left hand side of the Reconciliation dialogue called "VIAF Reconciliation Service"
-* Click on this to choose to use this reconciliation service
-* In the middle box in the reconciliation dialogue you may get asked what type of 'entity' you want to reconcile to - that is, what type of thing are you looking for. The list will vary depending on what reconciliation service you are using.
-    * In this case choose "Corporate Name" (it seems like the VIAF Reconciliation Service is slightly intelligent about this and will only offer options that are relevant)
-* In the box on the righthand side of the reconciliation dialogue you can choose if other columns are used to help the reconciliation service make a match - however it is sometimes hard to tell what use (if any) the reconciliation service makes of these additional columns
-* At the bottom of the reconciliation dialogue there is the option to "Auto-match candidates with high confidence". This can be a time saver, but in this case you are going to uncheck it, so you can see the results before a match is made
-* Now click 'Start Reconciling'
+*  Click on this to choose to use this reconciliation service
+*  In the middle box in the reconciliation dialogue you may get asked what type of 'entity' you want to reconcile to - that is, what type of thing are you looking for. The list will vary depending on what reconciliation service you are using.
+* In this case choose "Corporate Name" (it seems like the VIAF Reconciliation Service is slightly intelligent about this and will only offer options that are relevant)
+*  In the box on the righthand side of the reconciliation dialogue you can choose if other columns are used to help the reconciliation service make a match - however it is sometimes hard to tell what use (if any) the reconciliation service makes of these additional columns
+*  At the bottom of the reconciliation dialogue there is the option to "Auto-match candidates with high confidence". This can be a time saver, but in this case you are going to uncheck it, so you can see the results before a match is made
+*  Now click 'Start Reconciling'
 
 Reconciliation is an operation that can take a little time if you have many values to look up. However, in this case there are only 6 publishers to check, so it should work quite quickly.
 
 Once the reconciliation has completed two Facets should be created automatically:
+
 * Publisher: Judgement
 * Publisher: best candidate's score
 
@@ -546,9 +590,9 @@ There are two things that reconciliation can do for you. Firstly it gets a stand
 ## Extensions
 The functionality in OpenRefine can be enhanced by ‘extensions’ which can be downloaded and installed to add functionality to your OpenRefine installation.
 
-A list of Extensions (not necessarily complete) is given at https://github.com/OpenRefine/OpenRefine/wiki/Extensions
+A list of Extensions (not necessarily complete) is given at [https://github.com/OpenRefine/OpenRefine/wiki/Extensions](https://github.com/OpenRefine/OpenRefine/wiki/Extensions)
 
-One of these extensions tries to work around the limitation of Reconciliation services described above, by making it possible to use a reconciliation service against ‘linked data’ sources which have SPARQL endpoints. For more information on this see the ‘RDF Extension’ at http://refine.deri.ie. An example of how this works is given in more detail at http://refine.deri.ie/showcases.
+One of these extensions tries to work around the limitation of Reconciliation services described above, by making it possible to use a reconciliation service against ‘linked data’ sources which have SPARQL endpoints. For more information on this see the ‘RDF Extension’ at [http://refine.deri.ie](http://refine.deri.ie). An example of how this works is given in more detail at [http://refine.deri.ie/showcases](http://refine.deri.ie/showcases).
 
 ## Using the ‘cross’ function to lookup data in other OpenRefine projects
 As well as looking up data in external systems using the methods described above, it is also possible to look up data in other OpenRefine projects on the same computer. This is done using the ‘cross’ function which utilizes a GREL expression.
@@ -562,9 +606,10 @@ You can use to compare the contents of two OpenRefine projects, or to use data b
 The [VIB-Bits extension](https://www.bits.vib.be/index.php/software-overview/openrefine) adds a number of very useful functions to OpenRefine including a way of using the 'cross' function with simply point-and-click functionality which makes looking up data from other projects significantly simpler.
 
 ###Key Points
-*OpenRefine can look up custom URLs to fetch data based on what's in an OpenRefine project
-*API calls can be custom built, or one can use existing Reconcilliation services to enrich data
-*OpenRefine can be further enhanced by installing extensions
+
+* OpenRefine can look up custom URLs to fetch data based on what's in an OpenRefine project
+* API calls can be custom built, or one can use existing Reconcilliation services to enrich data
+* OpenRefine can be further enhanced by installing extensions
 
 ---
 ##Thanks!
