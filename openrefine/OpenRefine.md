@@ -491,8 +491,8 @@ Because retrieving data from external URLs takes time, this exercise targets a s
 
 * Select a single row from the data set which contains an ISSN by:
     * Clicking the star icon for the relevant row in the first column
-    * _Facet by Star_
-    * Choose the single row
+    * Select _Facet by Star_ from the 'All' menu on the far left
+    * Choose the single row by selecting 'True'
 * In the ISSN column use the dropdown menu to choose 'Edit column->Add column by fetching URLs'
 * Give the column a name e.g. "Journal details"
 * In the expression box you need to write some GREL where the output of the expression is a URL which can be used to retrieve data (the format of the data could be HTML, XML, JSON, or some other text format)
