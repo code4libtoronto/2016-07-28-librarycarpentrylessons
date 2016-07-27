@@ -1,0 +1,44 @@
+<CATALOG>
+   <PLANT>
+       <COMMON>Cowslip</COMMON>
+       <BOTANICAL>Caltha palustris</BOTANICAL>
+       <ZONE>4</ZONE>
+       <LIGHT>Mostly Shady</LIGHT>
+       <PRICE>$9.90</PRICE>
+       <AVAILABILITY>030699</AVAILABILITY> </PLANT>
+   <PLANT>
+       <COMMON>Dutchman's-Breeches</COMMON>
+       <BOTANICAL>Dicentra cucullaria</BOTANICAL>
+       <ZONE>3</ZONE>
+       <LIGHT>Mostly Shady</LIGHT>
+       <PRICE>$6.44</PRICE>
+       <AVAILABILITY>012099</AVAILABILITY> </PLANT>
+   <PLANT>
+       <COMMON>Ginger, Wild</COMMON>
+       <BOTANICAL>Asarum canadense</BOTANICAL>
+       <ZONE>3</ZONE>
+       <LIGHT>Mostly Shady</LIGHT>
+       <PRICE>$9.03</PRICE>
+       <AVAILABILITY>041899</AVAILABILITY> </PLANT>
+   <PLANT>
+       <COMMON>Hepatica</COMMON>
+       <BOTANICAL>Hepatica americana</BOTANICAL>
+       <ZONE>4</ZONE>
+       <LIGHT>Mostly Shady</LIGHT>
+       <PRICE>$4.45</PRICE>
+       <AVAILABILITY>012699</AVAILABILITY> </PLANT>
+   <PLANT>
+       <COMMON>Liverleaf</COMMON>
+       <BOTANICAL>Hepatica americana</BOTANICAL>
+       <ZONE>4</ZONE>
+       <LIGHT>Mostly Shady</LIGHT>
+       <PRICE>$3.99</PRICE>
+       <AVAILABILITY>010299</AVAILABILITY> </PLANT>
+   <PLANT>
+       <COMMON>Jack-In-The-Pulpit</COMMON>
+       <BOTANICAL>Arisaema triphyllum</BOTANICAL>
+       <ZONE>4</ZONE>
+       <LIGHT>Mostly Shady</LIGHT>
+       <PRICE>$3.23</PRICE>
+       <AVAILABILITY>020199</AVAILABILITY> </PLANT>
+</CATALOG>

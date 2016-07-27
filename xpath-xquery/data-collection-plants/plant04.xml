@@ -1,0 +1,30 @@
+<CATALOG>
+   <PLANT>
+       <COMMON>California Poppy</COMMON>
+       <BOTANICAL>Eschscholzia californica</BOTANICAL>
+       <ZONE>Annual</ZONE>
+       <LIGHT>Sun</LIGHT>
+       <PRICE>$7.89</PRICE>
+       <AVAILABILITY>032799</AVAILABILITY> </PLANT>
+   <PLANT>
+       <COMMON>Shooting Star</COMMON>
+       <BOTANICAL>Dodecatheon</BOTANICAL>
+       <ZONE>Annual</ZONE>
+       <LIGHT>Mostly Shady</LIGHT>
+       <PRICE>$8.60</PRICE>
+       <AVAILABILITY>051399</AVAILABILITY> </PLANT>
+   <PLANT>
+       <COMMON>Snakeroot</COMMON>
+       <BOTANICAL>Cimicifuga</BOTANICAL>
+       <ZONE>Annual</ZONE>
+       <LIGHT>Shade</LIGHT>
+       <PRICE>$5.63</PRICE>
+       <AVAILABILITY>071199</AVAILABILITY> </PLANT>
+   <PLANT>
+       <COMMON>Cardinal Flower</COMMON>
+       <BOTANICAL>Lobelia cardinalis</BOTANICAL>
+       <ZONE>2</ZONE>
+       <LIGHT>Shade</LIGHT>
+       <PRICE>$3.02</PRICE>
+       <AVAILABILITY>022299</AVAILABILITY> </PLANT>
+</CATALOG>

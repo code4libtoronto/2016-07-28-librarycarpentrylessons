@@ -28,9 +28,16 @@ Basic syntax rules
 
 XPath is written using expressions, and when these expressions are evaluated on XML documents they produce an object. XPath is typically used to select nodes, compare nodes, ?but technically you can't produce a node or list of nodes?. For that you would want to use something like XQuery.
 
+So unlike regex, you're usually not doing searches on text (though it is possible). Instead, if you have structured documents like these you're doing searches on nodes that tell you about your data. It's basically like doing a search on metadata and seeing the data results you get back.
+
 Now, lets begin to use XPath.
 
-## Loading data in BaseX
+
+## Practice
+
+We have an export of our data of recent book purchases
+
+### Loading data in BaseX
 
 1. If you've installed BaseX successfully, open your Terminal or command prompt and run BaseX by typing
     ``` $ basexgui ```
@@ -39,11 +46,19 @@ Now, lets begin to use XPath.
 4. Set the input bar option to XQuery and use that to enter in your XPath expressions
 
 BaseX is...
+
+* Editor
+* Result
+* Query Info
+* Visualizations: Tree
+* Input Bar
+
+
 other options/windows
 
 Looking at **xpath-xquery/data-books/books.xml:**
 
-```
+```xml
 <?xml version="1.0"?>
 <catalog>
    <book id="bk101" category="TECHNOLOGY">
@@ -179,7 +194,7 @@ In BaseX, bring up the tree visualization of your document.
 
 XPath represents xml as a tree data structure. Here are some common terminologies to describe elements of the XML document tree:
 
-**node** - XML trees are composed of connected XML elements in a hierarchy = nodes of the tree
+**node** - XML trees are composed of connected XML elements in a hierarchy = nodes of the tree. Note: Nodes and elements are used interchangeably in this lesson.
 
 **level** - a level represents a hierahical connection from one node to another
 
@@ -223,11 +238,7 @@ In XPath, the most useful path expressions are listed below:
 
 ### Exercises
 
-Now you try:
-
-
-
-When your current context node is a book node:
+Now you try. When your current context node is a book node:
 
 | Path Expression   | Expression Result |
 |-----------------|:-------------|
@@ -239,6 +250,8 @@ When your current context node is a book node:
 1. talk about the difference between relative and absolute paths then show them an example using tree view
 
 ## Operators
+
+WHAT ARE OPERATORS?
 
 | Operator   | Explanation |
 |-----------------|:-------------|
@@ -253,7 +266,7 @@ When your current context node is a book node:
 
 Note: '!=' != 'not', for instance in this snippet
 
-```
+```xml
 <book id='bk101'></book>
 <book></book>
 <book type='paperback'></book>
@@ -263,19 +276,21 @@ Note: '!=' != 'not', for instance in this snippet
 
 The expression ```@id != 'bk101'``` will bring back
 
-```
+```xml
 <book id='bk102'></book>
 <book id='bk103'></book>
 ```
 
 While the expression ```not(@id='bk101')``` will bring back
 
-```
+```xml
 <book></book>
 <book type='paperback'></book>
 <book id='bk102'></book>
 <book id='bk103'></book>
 ```
+
+This is because != indicates the existence of an @id, whie the not() expression expresses to bring back everything except @id='bk101'
 
 ### Examples 
 
@@ -285,7 +300,12 @@ While the expression ```not(@id='bk101')``` will bring back
 |```//book```|	Select all book elements no matter where they are in the document|
 |```/catalog//book```	| Select all book elements that are descendant of the catalog element, no matter where they are under the catalog element|
 |```//@lang```|	Select all attributes that are named lang|
-|/catalog/book[not(@id="bk101")]||
+|```/catalog/book[not(@id="bk101")]```|Select all book elements except for the book that has an id "bk101"|
+
+
+### Exercises
+- Piping:
+/catalog/book/@category | /catalog/book/publish_date/text()
 
 ## Predicates
 
@@ -427,7 +447,7 @@ for $titleitem in fn:doc("books.xml")/catalog/book/title
 return $titleitem
 ```
 
-**Let** - the 'let' clause basically declares a value without iteration. In XQuery, you assign a single value to a variable using let, or it assigns a variable to the whole set of elements. Your subsequent statements will act on an aggregate set of items.
+**Let** - the 'let' clause basically declares a value without iteration. In XQuery, you assign a single result to a variable using let, which can be a single value, element or a whole set of elements. Your subsequent statements will act on an aggregate set of items.
 
 e.g.
 
@@ -490,7 +510,25 @@ return<object><id>{$author}</id><title>{$title}</title></object> }</report>
 
 ## XQuery Update
 
-update facility 
+XQuery has an extension called [XQuery Update Facility](https://www.w3.org/TR/xquery-update-10/)
+
+The XQuery Update Facility provides five basic operations acting upon XML nodes:
+
+* insert one or several nodes inside/after/before a specified node
+* delete one or several nodes
+* replace a node (and all its descendants if it is an element) by a sequence of nodes.
+* replace the contents (children) of a node with a sequence of nodes, or the value of a node with a string value.
+* rename a node (applicable to elements, attributes and processing instructions) without affecting its contents or attributes.
+
+BaseX has a [complete implementation](http://docs.basex.org/wiki/XQuery_Update) of the XQuery Update specification.
+
+Running
+```
+for $x in collection(data-collection-plants)//ZONE
+return insert node $x after $x
+```
+
+Will
 
 # Reference
 
