@@ -181,19 +181,11 @@ Note: another way to approach this example is not to match by position using an 
 
 You are working with an archive of several thousand papers and theses writeen in LaTeX, a text-based document formatting program. The documents look like this:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 > \documentclass{article}  
 > \begin{document}  
 > \section*{Discussion}  
 > Granger's work on graphs \cite{dd-gr2007}, particularly ones obeying Snape's Inequality \cite{ snape87 } (but see \cite{quirrell89}, has opened up new lines of research. However, studies at Unseen University \cite{stibbons2008} highlight several dangers.  
 > \end{document}
-=======
-> Granger's work on graphs \cite{dd-gr2007}, particularly ones obeying Snape's Inequality \cite{ snape87 } (but see \cite{quirrell89}, has opened up new lines of research. However, studies at Unseen University \cite{stibbons2008} highlight several dangers.
->>>>>>> origin/master
-=======
-> Granger's work on graphs \cite{dd-gr2007}, particularly ones obeying Snape's Inequality \cite{ snape87 } (but see \cite{quirrell89}, has opened up new lines of research. However, studies at Unseen University \cite{stibbons2008} highlight several dangers.
->>>>>>> origin/master
 
 All the LaTeX formatted papers use the same labels to refer to items in a shared bibliography. These citations have certain characteristics:
 
@@ -206,97 +198,7 @@ Your ultimate goal is to find out how often citations appear together, i.e. how 
 
 * [Download the sample text](data/exercise1_data.txt) and paste it into Regex101.
 * Write a regular expression that matches all of the citations in the sample text. Use grouping to ensure you match only the citations themselves, without any surrounding characters.
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-
-## Exercise 2
-
-Let's practice making matches with xml data. Imagine a simple book catalogue with the following xml elements and attributes:
-
-> \<catalog>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \<book id="bk101">  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<author>Gambardella, Matthew\</author>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<title>XML Developer's Guide\</title>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<genre>Computer\</genre>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<price>44.95\</price>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<publish\_date>2000-10-01\</publish_date>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<description>An in-depth look at creating applications with XML.  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\</description>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \</book>  
-> \</catalog>  
-
-   
-*(sample data source: [Microsoft documentation](https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx))*
-
-
-[Download the sample text](data/exercise2_data.txt) and paste it into Regex101. 
-
-Write a variety of regular expressions to match tags, attributes, and content, for example:
-
-* Match all text between angle brackets (tags)
-* Match all prices
-* Match all prices of $40 or greater
-* Match all book IDs
-* Match all book ID numbers (without the preceding 'bk')
-* Match all publication dates in 2001 or 2002
-* Match all author's last names
-* What else can you think of?
-
-As you'll soon see, our next session on XPath/XQuery will make pinpointing specific xml nodes a **lot** easier. You'll be able to use XPath to identify specific nodes and combine it with regex to select content.
-
-
-## More Practice
-=======
->>>>>>> origin/master
-
-Go through the exercises at:  
-Regex One: http://regexone.com/  
-Regex golf: http://regex.alf.nu/
-
-## Exercise 2
-
-Let's practice making matches with xml data. Imagine a simple book catalogue with the following xml elements and attributes:
-
-> \<catalog>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \<book id="bk101">  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<author>Gambardella, Matthew\</author>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<title>XML Developer's Guide\</title>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<genre>Computer\</genre>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<price>44.95\</price>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<publish\_date>2000-10-01\</publish_date>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<description>An in-depth look at creating applications with XML.  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\</description>  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \</book>  
-> \</catalog>  
-
-   
-*(sample data source: [Microsoft documentation](https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx))*
-
-
-[Download the sample text](data/exercise2_data.txt) and paste it into Regex101. 
-
-Write a variety of regular expressions to match tags, attributes, and content, for example:
-
-* Match all text between angle brackets (tags)
-* Match all prices
-* Match all prices of $40 or greater
-* Match all book IDs
-* Match all book ID numbers (without the preceding 'bk')
-* Match all publication dates in 2001 or 2002
-* Match all author's last names
-* What else can you think of?
-
-As you'll soon see, our next session on XPath/XQuery will make pinpointing specific xml nodes a **lot** easier. You'll be able to use XPath to identify specific nodes and combine it with regex to select content.
-
-
-## More Practice
-=======
->>>>>>> origin/master
-
-Go through the exercises at:  
-Regex One: http://regexone.com/  
-Regex golf: http://regex.alf.nu/
 
 ## Exercise 2
 
