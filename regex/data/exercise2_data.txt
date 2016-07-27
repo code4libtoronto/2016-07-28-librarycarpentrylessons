@@ -56,7 +56,11 @@
       <genre>Romance</genre>
       <price>4.95</price>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <publish_date>2002-09-02</publish_date>
+=======
+      <publish_date>2000-09-02</publish_date>
+>>>>>>> origin/master
 =======
       <publish_date>2000-09-02</publish_date>
 >>>>>>> origin/master
