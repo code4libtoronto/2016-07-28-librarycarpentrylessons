@@ -97,6 +97,7 @@ These are used in combination with text characters to construct regular expressi
 | \b | Anchor: matches at "word boundary" (zero length position), i.e. transition from word to non-word characters. This allows you to perform "whole word only" searchers e.g. `\bword\b`
 | \w | Shorthand character class: "word". Marches all the ASCII characters [A-Za-z0-9_] |
 | \s | Shorthand character class: "whitespace". Matches non-word characters including space, tab, line break or form feed. |
+| \d | Shorthand character class: "digit". Matches numeric characters [0-9]. |
 
 
 
@@ -142,7 +143,10 @@ In order to illustrate the use of character sets, lets return to our problem of 
 * We can do this by replacing `.` (any one character) with a character set specifying only numbers: `[0-9]` (any one number between 0 and 9). So now we have `\/(.+) ([0-9]{1,2}),? (.{4})\/`
 * We can use the same technique to make our month matching more precise as well. We know that our months should begin with an upper case letter followed by some unknown number of lower case letters. A single upper case letter can be expressed as a character set `[A-Z]` and one or more lower case letters can be expressed as `[a-z]+`. 
 * And, we can use this technique to ensure that our expression matches only years that consist of four number characters.
-* Our final regex has expanded to: `\/([A-Z][a-z]+) ([0-9]{1,2}),? ([0-9]{4})\/`. Quite a monster, but it does the trick!
+* Our final regex has expanded to: `\/([A-Z][a-z]+) ([0-9]{1,2}),? ([0-9]{4})\/`. Quite a monster!
+
+Regex offers a few shortcut operators that can make your life a bit easier when dealing with character sets, for example `\d` matches all numeric digits `[0-9]` and  `\w` matches all word characters `[A-Za-z0-9]`. We could use these to shorten our expression (though note that this will produce slightly less rigid requirements for the month matches):
+`\/(\w+) (\d{1,2}),? (\d{4})\/`
 
 ## Anchors
 
@@ -164,7 +168,8 @@ Finally, replase the test string in Regex101 with this one:
 
 The simple rebex `help` makes 3 matches. Use `\bhelp\b` to match only the word 'help'.
 
- 
+Note: another way to approach this example is not to match by position using an anchor, but to use a shorthand operator that matches white spaces: `\s`. For example: `\s(help)\s`. Note the expression actually matches the white spaces on either side of the word, so you need to employ grouping to match the word itself.
+
 
 ## Building regular expressions
 
@@ -176,7 +181,15 @@ The simple rebex `help` makes 3 matches. Use `\bhelp\b` to match only the word '
 
 You are working with an archive of several thousand papers and theses writeen in LaTeX, a text-based document formatting program. The documents look like this:
 
+<<<<<<< HEAD
+> \documentclass{article}  
+> \begin{document}  
+> \section*{Discussion}  
+> Granger's work on graphs \cite{dd-gr2007}, particularly ones obeying Snape's Inequality \cite{ snape87 } (but see \cite{quirrell89}, has opened up new lines of research. However, studies at Unseen University \cite{stibbons2008} highlight several dangers.  
+> \end{document}
+=======
 > Granger's work on graphs \cite{dd-gr2007}, particularly ones obeying Snape's Inequality \cite{ snape87 } (but see \cite{quirrell89}, has opened up new lines of research. However, studies at Unseen University \cite{stibbons2008} highlight several dangers.
+>>>>>>> origin/master
 
 All the LaTeX formatted papers use the same labels to refer to items in a shared bibliography. These citations have certain characteristics:
 
@@ -189,8 +202,52 @@ Your ultimate goal is to find out how often citations appear together, i.e. how 
 
 * [Download the sample text](data/exercise1_data.txt) and paste it into Regex101.
 * Write a regular expression that matches all of the citations in the sample text. Use grouping to ensure you match only the citations themselves, without any surrounding characters.
+<<<<<<< HEAD
 
-This activity will require you to use the techniques we have practiced already, and also to explore and try out a few new ones described in the metacharacter table above, including some handy shorthand character classes such as \s.
+
+## Exercise 2
+
+Let's practice making matches with xml data. Imagine a simple book catalogue with the following xml elements and attributes:
+
+> \<catalog>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \<book id="bk101">  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<author>Gambardella, Matthew\</author>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<title>XML Developer's Guide\</title>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<genre>Computer\</genre>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<price>44.95\</price>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<publish\_date>2000-10-01\</publish_date>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \<description>An in-depth look at creating applications with XML.  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\</description>  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \</book>  
+> \</catalog>  
+
+   
+*(sample data source: [Microsoft documentation](https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx))*
+
+
+[Download the sample text](data/exercise2_data.txt) and paste it into Regex101. 
+
+Write a variety of regular expressions to match tags, attributes, and content, for example:
+
+* Match all text between angle brackets (tags)
+* Match all prices
+* Match all prices of $40 or greater
+* Match all book IDs
+* Match all book ID numbers (without the preceding 'bk')
+* Match all publication dates in 2001 or 2002
+* Match all author's last names
+* What else can you think of?
+
+As you'll soon see, our next session on XPath/XQuery will make pinpointing specific xml nodes a **lot** easier. You'll be able to use XPath to identify specific nodes and combine it with regex to select content.
+
+
+## More Practice
+=======
+>>>>>>> origin/master
+
+Go through the exercises at:  
+Regex One: http://regexone.com/  
+Regex golf: http://regex.alf.nu/
 
 ## Exercise 2
 
