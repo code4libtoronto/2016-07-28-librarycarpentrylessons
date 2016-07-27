@@ -2,7 +2,6 @@
 
 # XPath
 ## Introduction
-Introduction to XPath
 
 XPath (which stands for XML Path Language) is an expression language used to specify parts of an XML document, which is designed to be used by XML tooling languages such as XSLT or XQuery. XPath used in other DOM structures like HTML.
 
@@ -11,8 +10,8 @@ In case you don't know what XML is, XML is a markup language. This means that it
 XML documents stores data in plain text format. This provides a software- and hardware-independent way of storing, transporting, and sharing data.
 
 Basic syntax rules
-* XML elements must have an opening and closing tag, e.g. ``` <catfood> ``` opening tag and ``` </catfood>``` closing tag
-* XML tags are case sensitive, e.g. ``` <catfood>``` does not equal ``` <catFood> ```
+* XML elements must have an opening and closing tag, e.g. `<catfood> ` opening tag and ` </catfood>` closing tag
+* XML tags are case sensitive, e.g. ` <catfood>` does not equal ` <catFood> `
 * XML elements must be properly nested:
 
 ```
@@ -40,12 +39,14 @@ We have an export of our data of recent book purchases
 ### Loading data in BaseX
 
 1. If you've installed BaseX successfully, open your Terminal or command prompt and run BaseX by typing
-    ``` $ basexgui ```
+    ```bash
+    $ basexgui
+    ```
 2. Create a new database by going into Database > New
-3. Browse to your xpath-xquery directory, click on the data-books directory then select Choose. Hit OK.
+3. Browse to your `xpath-xquery` directory, click on the `data-books` directory then select Choose. Hit OK.
 4. Set the input bar option to XQuery and use that to enter in your XPath expressions
 
-BaseX is...
+BASEX IS...ADD MORE INFO
 
 * Editor
 * Result
@@ -53,10 +54,7 @@ BaseX is...
 * Visualizations: Tree
 * Input Bar
 
-
-other options/windows
-
-Looking at **xpath-xquery/data-books/books.xml:**
+Looking at `xpath-xquery/data-books/books.xml`:**
 
 ```xml
 <?xml version="1.0"?>
@@ -211,9 +209,11 @@ XPath represents xml as a tree data structure. Here are some common terminologie
 XPath uses path expressions to select nodes in an XML document. The node is selected by following a path or steps. XPath uses the slash to denote traversal of the structure of your document in a path, in the same way as URLs or unix directories.
 
 
-## Abbreviated Syntax 
+## Abbreviated Syntax
 
-In XPath, the most useful path expressions are listed below:
+In XPath, all of your expressions are evaluated based on a context. The default context is your root node, indicated by a slash (/).
+
+The most useful path expressions are listed below:
 
 | Expression   | Description |
 |-----------------|:-------------|
@@ -238,20 +238,20 @@ In XPath, the most useful path expressions are listed below:
 
 ### Exercises
 
-Now you try. When your current context node is a book node:
+Now you try XPath using a different context. In BaseX, if you go to the tree view and double-click on a book node, your context will start at that book node. From your current context:
 
 | Path Expression   | Expression Result |
 |-----------------|:-------------|
-| ```.``` | Select the context book node|
-| ```..``` | Select the context book node|
-|```/catalog/book/author```| Select the author node|
-|```author```| Select the author node|
+|  | Select the context book node|
+| | Select the context's parent node|
+|| Select the author node|
+|| Select the author node irregardless of context - the absolute path|
 
 1. talk about the difference between relative and absolute paths then show them an example using tree view
 
 ## Operators
 
-WHAT ARE OPERATORS?
+Operators are .... ADD MORE INFO
 
 | Operator   | Explanation |
 |-----------------|:-------------|
@@ -292,7 +292,7 @@ While the expression ```not(@id='bk101')``` will bring back
 
 This is because != indicates the existence of an @id, whie the not() expression expresses to bring back everything except @id='bk101'
 
-### Examples 
+### Examples
 
 | Path Expression   | Expression Result |
 |-----------------|:-------------|
@@ -304,8 +304,10 @@ This is because != indicates the existence of an @id, whie the not() expression 
 
 
 ### Exercises
-- Piping:
-/catalog/book/@category | /catalog/book/publish_date/text()
+
+| Expression   | Result |
+|-----------------|:-------------|
+||I want to see the categories of all of the books but also the publish date.|
 
 ## Predicates
 
@@ -315,7 +317,7 @@ Predicates are always embedded in square brackets, and are meant to provide addi
 
 In the table below we have listed some path expressions with predicates and the result of the expressions:
 
-| Expression   | Expression Result |
+| Expression   | Result |
 |-----------------|:-------------|
 | ```[1]```  |Select the first element|
 | ```[last()]```  |Select the last element|
@@ -346,26 +348,20 @@ In the table below we have listed some path expressions and the result of the ex
 |```//title[@*]```	|Select all title elements which have at least one attribute of any kind|
 
 
-### Examples
+### Exercises
 
 |Path Expression|	Result|
 |-----------------|:-------------|
-| ```/``` or ```/.```      |Select the document root node|
-| ```/catalog```      |Select the catalog node|
-|  ```/catalog/book``` or ```//book```     |Select all book element nodes|
-|  ```/catalog/book/price``` or ```//price```     |Select all price element nodes|
-| ```//@lang```      |Select all language attribute nodes|
-|  ```//price/text()``` or ```/catalog/book/price/text()```     |Select text nodes of all price element nodes|
-|  ```/catalog/book/*```     |Select all child nodes of book element nodes|
-|   ```//@*```    |Select all attributes|
-|  ```//@lang/..```       |Select the immediate parent node of attribute language|
-|```/catalog/book[price>15.00]/title```	|Select all the title elements of the book elements of the catalog element that have a price element with a value greater than 15.00|
-|```//title[not(@lang='en')]```|what do i do?|
-|```/catalog/book[title[not(@lang='en')]][position()<4]/author/text()```|what do i do?|
+|   ```//@*```    |What do you expect as your result?|
+|  |For all nodes that have the language attribute, select the immediate parent|
+||Select all the title elements of the book elements of the catalog element that have a price element with a value greater than 15.00|
+|```//title[@lang!="en"]```|What do you expect as your result?|
+|```/catalog/book[title[not(@lang='en')]][position()<4]/author/text()```|What do you expect as your result?|
 
 
-XPath and in-text search
-case-sensitive
+## In-text search
+
+XPath can do in-text searching and also supports regex with its matches() function. Note: in-text searching is case-sensitive!
 
 |Path Expression|	Result|
 |-----------------|:-------------|
@@ -374,32 +370,28 @@ case-sensitive
 |```//author[ends-with(.,"w")]```|Matches on all author nodes, in current node ends with w (case-sensitive)|
 |```//author[matches(.,"Matt.*")]```| regular expressions match 2.0 |
 
-### Exercise
+### Exercises
 
-* Matches all publish date nodes, in format yyyy-mm-dd, from January to May
-
-
-Solution
-
-```
-//publish_date[matches(.,"-[0][1-5]-")]
-```
-
+| Expression   | Result |
+|-----------------|:-------------|
+||Match all publish date nodes, from January to May (Note: all dates are in yyyy-mm-dd format)|
 
 ### Exercises
 
-Now try it with /data-menu/menu.xml
+Now try XPath with `xpath-xquery/data-menu/menu.xml`
 
-* I want to view all foods with a nutrional value of 800 calories and less than 200 grams of sugar
-* I want to view the reviews of all foods with a review rating below 5
-* I want to compare the corporate and review description of these foods
-* Is there a correlation between the cost of a food and its review rating?
-* Is there a correlation between the amount of sugar in a food and its review rating?
-* I want to find all foods that have waffle in the title
+| Expression   | Result |
+|-----------------|:-------------|
+||I want to know all of the foods with a nutritional value of 800 calories and less than or equal to 200 grams of sugar|
+||I want to view the reviews of all foods with a review rating below 5|
+||I want to compare the corporate and review description of these foods|
+||I want to compare the cost of a food, the amount of sugar, and its review rating|
+||I want to find all foods that have Waffle in its name|
+
 
 ## Complete syntax: XPath Axes
 
-XPath Axes are ....
+XPath Axes are .... ADD MORE INFO
 
 * self ‐‐ the context node itself
 * child ‐‐ the children of the context node
@@ -437,7 +429,7 @@ Below are a few examples of how XQuery can be used:
 
 ## FLWOR statements
 
-**For** - the 'for' clause basically states: "for every item in a set of items, do something." 
+**For** - the 'for' clause basically states: "for every item in a set of items, do something."
 
 The 'for' clause in XQuery iteratively assigns a variable to every item in a set of items selected using XPath.
 
@@ -503,7 +495,7 @@ for $item in fn:doc("books.xml")/catalog/book
 let $author := $item/author/text()
 let $title := $item/title/text()
 where fn:contains($item/genre, "Fantasy")
-order by $title 
+order by $title
 return<object><id>{$author}</id><title>{$title}</title></object> }</report>
 ```
 
@@ -523,12 +515,13 @@ The XQuery Update Facility provides five basic operations acting upon XML nodes:
 BaseX has a [complete implementation](http://docs.basex.org/wiki/XQuery_Update) of the XQuery Update specification.
 
 Running
+
 ```
-for $x in collection(data-collection-plants)//ZONE
-return insert node $x after $x
+for $zonenode in collection(data-collection-plants)//ZONE
+return insert node $zonenode after $zonenode
 ```
 
-Will
+Will find the nodes that match the xpath expression `//ZONE`, then insert an identical <ZONE /> node wherever that node occurs in the document.
 
 # Reference
 
@@ -540,7 +533,9 @@ Mac:
 [Install a JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 You need to install [homebrew](http://brew.sh/)
 Once that's installed, run
-```brew install basex```
+```bash
+brew install basex
+```
 
 Windows: use installer
 Linux: use the distribution package
@@ -552,10 +547,14 @@ In your terminal, run
 ## Additional Resources
 [XML Path Language (XPath) W3C Recommendation](https://www.w3.org/TR/xpath/)
 
-## Real data samples
+## XML data samples in the wild
 
 [York University 1](https://digital.library.yorku.ca/yul-95212/hairdressing-mr-gino-bay-beauty-salon/datastream/MODS/view)
+
 [York University 2](https://digital.library.yorku.ca/yul-93087/dog-obedience-course-lawrence-plaza/datastream/MODS/view)
+
 [York University 3](https://digital.library.yorku.ca/yul-233240/mariposa-festival/datastream/MODS/view)
+
 [University of Toronto Scarborough 1](http://digitalscholarship.utsc.utoronto.ca/projects/islandora/object/nearbystudies%3A546/datastream/MODS/view)
+
 [University of Toronto Scarborough 2](http://digitalscholarship.utsc.utoronto.ca/projects/islandora/object/nearbystudies%3A585/datastream/MODS/view)
