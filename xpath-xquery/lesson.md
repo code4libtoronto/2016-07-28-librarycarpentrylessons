@@ -234,6 +234,8 @@ The most useful path expressions are listed below:
 | ```.```       | Select the current context node   |
 |```..```  | Select the parent of the context node|
 |```@```   |Select attributes|
+|`text()`| Select the value of an element|
+| &#124;|Pipe chains expressions and brings back results from either expression |
 
 
 ### Examples
@@ -253,20 +255,19 @@ Now you try XPath using a different context. In BaseX, if you go to the tree vie
 
 | Path Expression   | Expression Result |
 |-----------------|:-------------|
-|  | Select the context book node|
-| | Select the context's parent node|
+|| Select the context book node|
+|| Select the context's parent node|
+|| Select the context's publish date value|
 || Select the author node|
-|| Another way to select the author node |
 
-Why doesn't /author work? Did you figure out how to select the author node irregardless of context - the absolute path?
+Did you try /author? Why doesn't it work? How do you select the author node irregardless of context - the absolute path?
 
 ## Operators
 
-Operators are used to compare nodes. There are mathematical operators, boolean operators. Here are some useful ones:
+Operators are used to compare nodes. There are mathematical operators, boolean operators. Operators can give you boolean (true/false values) as a result. Here are some useful ones:
 
 | Operator   | Explanation |
 |-----------------|:-------------|
-| &#124;|Pipe chains expressions and brings back results from either expression |
 |```=```|Equivalent comparison, can be used for numeric or text values|
 |```!=```|Is not equivalent comparison|
 |```>, >=```|Greater than, greater than or equal to|
@@ -274,34 +275,6 @@ Operators are used to compare nodes. There are mathematical operators, boolean o
 |```or```|Boolean or|
 |```and```|Boolean and|
 |```not```|Boolean not|
-
-Note: '!=' != 'not', for instance in this snippet
-
-```xml
-<book id='bk101'></book>
-<book></book>
-<book type='paperback'></book>
-<book id='bk102'></book>
-<book id='bk103'></book>
-```
-
-The ```@id != 'bk101'``` will bring back
-
-```xml
-<book id='bk102'></book>
-<book id='bk103'></book>
-```
-
-While ```not(@id='bk101')``` will bring back
-
-```xml
-<book></book>
-<book type='paperback'></book>
-<book id='bk102'></book>
-<book id='bk103'></book>
-```
-
-This is because != indicates the existence of an @id, whie the not() expression expresses to bring back everything except @id='bk101'
 
 ### Examples
 
@@ -316,7 +289,7 @@ This is because != indicates the existence of an @id, whie the not() expression 
 | Expression   | Result |
 |-----------------|:-------------|
 ||Are any of the bestselling books Sci-Fi (category SCIFI)?|
-||Are there any books in the Computer genre that are over $50?|
+||Are there any books in the Computer genre that are over $10 but under $50?|
 ||I want to see the categories of all of the books but also the publish date. Hint: use the pipe|
 
 ## Predicates
@@ -337,9 +310,37 @@ Predicates are always embedded in square brackets, and are meant to provide addi
 |```[@lang='en']```|	Select all the nodes that have a "attribute" attribute with a value of "en"|
 |```[price>15.00]```|	Select all nodes that have a price node with a value greater than 15.00|
 
-What other values can you use on text in xml? you can see numbers, text, booleans
+Note: '!=' != 'not', for instance in this snippet
 
-Selecting Unknown Nodes
+```xml
+<book id='bk101'></book>
+<book></book>
+<book type='paperback'></book>
+<book id='bk102'></book>
+<book id='bk103'></book>
+```
+
+The ```[@id != 'bk101']``` will bring back
+
+```xml
+<book id='bk102'></book>
+<book id='bk103'></book>
+```
+
+While ```[not(@id='bk101')]``` will bring back
+
+```xml
+<book></book>
+<book type='paperback'></book>
+<book id='bk102'></book>
+<book id='bk103'></book>
+```
+
+This is because != indicates the existence of an @id, whie the not() expression expresses to bring back everything except @id='bk101'
+
+
+##wildcards
+
 XPath wildcards can be used to select unknown XML nodes.
 
 |Wildcard	|Description|
@@ -347,6 +348,7 @@ XPath wildcards can be used to select unknown XML nodes.
 |```*```	|Matches any element node|
 |```@*```|	Matches any attribute node|
 |```node()```|	Matches any node of any kind|
+
 
 
 ### Examples
@@ -397,7 +399,7 @@ Now try XPath with `xpath-xquery/data-menu/menu.xml`
 | Expression   | Result |
 |-----------------|:-------------|
 ||I want to know all of the foods with a nutritional value of 800 calories and less than or equal to 200 grams of sugar|
-||I want to view the reviews of all foods with a review rating below 5|
+||I want to view the reviews of all foods with a review rating below 5 or are under $10|
 ||I want to compare the corporate and review description of these foods|
 ||I want to compare the cost of a food, the amount of sugar, and its review rating|
 ||I want to find all foods that have Waffle in its name|
@@ -450,7 +452,7 @@ Functions on strings and numeric types, recognize dates and can do comparisons. 
 
 Some useful string functions:
 
-* fn:replace('query', 'input', 'replacementvalue')
+* fn:replace('query', 'input', 'replacementvalue') - also can use regex
 * fn:upper-case('query')
 * fn:lower-case('query')
 * fn:normalize-space('query')
@@ -459,7 +461,9 @@ It's also possible to write your own reusable functions!
 
 ## FLWOR statements
 
-XQuery statements are written with FLWOR clauses. If you are familiar with SQL, you structure your queries using clauses like SELECT, FROM, WHERE clauses and similarly can be used to join documents.
+XQuery statements are written with FLWOR clauses. If you are familiar with SQL, you structure your queries using clauses like SELECT, FROM, WHERE clauses and similarly can be used to join documents. In XQuery:
+
+`:=` indicates creation of a variable and assignment
 
 **For** - the 'for' clause basically states: "for every item in a set of items, do something."
 
@@ -479,7 +483,7 @@ You would get all of the titles of each book back.
 e.g.
 
 ```
-let $cost = 300
+let $cost := 300
 ```
 
 e.g.
@@ -569,6 +573,12 @@ return insert node $zonenode after $zonenode
 Will find the nodes that match the xpath expression `//ZONE`, then insert an identical <ZONE /> node wherever that node occurs in the document.
 
 ### Exercises
+
+* In /data-menu-xquery, clean up the prices so you can perform operations on those nodes as numeric values
+```
+for $text in db:open("data-menu-xquery","menu.xml")/breakfast_menu/food/price
+return replace value of node $text with fn:replace($text, "\$", "")
+```
 
 * Rename the AVAILABILITY node to SERIALNO in the entire plant database.
 

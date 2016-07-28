@@ -2,7 +2,7 @@
 <breakfast_menu>
 	<food>
 		<name>Belgian Waffles</name>
-		<price>5.95</price>
+		<price>$5.95</price>
 		<description type="review">The Belgian Waffles are alright</description>
 		<description type="corporate">Two of our famous Belgian Waffles with plenty of real maple syrup</description>
         <rating type="review">7</rating>
@@ -13,7 +13,7 @@
 	</food>
 	<food>
 		<name>Strawberry Belgian Waffles</name>
-		<price>7.95</price>
+		<price>$7.95</price>
 		<description type="review">The Light Belgian waffles covered with strawberries and whipped cream are alright</description>
 		<description type="corporate">We have amazing light Belgian waffles covered with strawberries and whipped cream</description>
         <rating type="review">6</rating>
@@ -24,7 +24,7 @@
 	</food>
 	<food>
 		<name>Berry-Berry Belgian Waffles</name>
-		<price>8.95</price>
+		<price>$8.95</price>
 		<description type="review">Too many berries</description>
 		<description type="corporate">Light Belgian waffles covered with an assortment of fresh berries and whipped cream</description>
         <rating type="review">2</rating>
@@ -35,7 +35,7 @@
 	</food>
 	<food>
 		<name>French Toast</name>
-		<price>4.50</price>
+		<price>$4.50</price>
 		<description type="review">The french toast is really sweet</description>
 		<description type="corporate">Thick slices made from our homemade sourdough bread</description>
         <rating type="review">3</rating>
@@ -46,7 +46,7 @@
 	</food>
 	<food>
 		<name>Homestyle Breakfast</name>
-		<price>6.95</price>
+		<price>$6.95</price>
 		<description type="review">A hearty breakfast indeed</description>
 		<description type="corporate">Two eggs, bacon or sausage, toast, and our ever-popular hash browns</description>
         <rating type="review">10</rating>
