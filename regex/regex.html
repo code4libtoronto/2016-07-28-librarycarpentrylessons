@@ -495,6 +495,10 @@ Pertwee/Sept 3, 2010/3981.0<br>
 <td>\s</td>
 <td>Shorthand character class: &quot;whitespace&quot;. Matches non-word characters including space, tab, line break or form feed.</td>
 </tr>
+<tr>
+<td>\d</td>
+<td>Shorthand character class: &quot;digit&quot;. Matches numeric characters [0-9].</td>
+</tr>
 </tbody>
 </table>
 
@@ -546,8 +550,11 @@ Pertwee/Sept 3, 2010/3981.0<br>
 <li>We can do this by replacing <code>.</code> (any one character) with a character set specifying only numbers: <code>[0-9]</code> (any one number between 0 and 9). So now we have <code>\/(.+) ([0-9]{1,2}),? (.{4})\/</code></li>
 <li>We can use the same technique to make our month matching more precise as well. We know that our months should begin with an upper case letter followed by some unknown number of lower case letters. A single upper case letter can be expressed as a character set <code>[A-Z]</code> and one or more lower case letters can be expressed as <code>[a-z]+</code>. </li>
 <li>And, we can use this technique to ensure that our expression matches only years that consist of four number characters.</li>
-<li>Our final regex has expanded to: <code>\/([A-Z][a-z]+) ([0-9]{1,2}),? ([0-9]{4})\/</code>. Quite a monster, but it does the trick!</li>
+<li>Our final regex has expanded to: <code>\/([A-Z][a-z]+) ([0-9]{1,2}),? ([0-9]{4})\/</code>. Quite a monster!</li>
 </ul>
+
+<p>Regex offers a few shortcut operators that can make your life a bit easier when dealing with character sets, for example <code>\d</code> matches all numeric digits <code>[0-9]</code> and  <code>\w</code> matches all word characters <code>[A-Za-z0-9]</code>. We could use these to shorten our expression (though note that this will produce slightly less rigid requirements for the month matches):
+<code>\/(\w+) (\d{1,2}),? (\d{4})\/</code></p>
 
 <h2 id="toc_12">Anchors</h2>
 
@@ -569,6 +576,8 @@ Pertwee/Sept 3, 2010/3981.0<br>
 
 <p>The simple rebex <code>help</code> makes 3 matches. Use <code>\bhelp\b</code> to match only the word &#39;help&#39;.</p>
 
+<p>Note: another way to approach this example is not to match by position using an anchor, but to use a shorthand operator that matches white spaces: <code>\s</code>. For example: <code>\s(help)\s</code>. Note the expression actually matches the white spaces on either side of the word, so you need to employ grouping to match the word itself.</p>
+
 <h2 id="toc_13">Building regular expressions</h2>
 
 <ul>
@@ -582,7 +591,11 @@ Pertwee/Sept 3, 2010/3981.0<br>
 <p>You are working with an archive of several thousand papers and theses writeen in LaTeX, a text-based document formatting program. The documents look like this:</p>
 
 <blockquote>
-<p>Granger&#39;s work on graphs \cite{dd-gr2007}, particularly ones obeying Snape&#39;s Inequality \cite{ snape87 } (but see \cite{quirrell89}, has opened up new lines of research. However, studies at Unseen University \cite{stibbons2008} highlight several dangers.</p>
+<p>\documentclass{article}<br>
+\begin{document}<br>
+\section*{Discussion}<br>
+Granger&#39;s work on graphs \cite{dd-gr2007}, particularly ones obeying Snape&#39;s Inequality \cite{ snape87 } (but see \cite{quirrell89}, has opened up new lines of research. However, studies at Unseen University \cite{stibbons2008} highlight several dangers.<br>
+\end{document}</p>
 </blockquote>
 
 <p>All the LaTeX formatted papers use the same labels to refer to items in a shared bibliography. These citations have certain characteristics:</p>
@@ -600,8 +613,6 @@ Pertwee/Sept 3, 2010/3981.0<br>
 <li><a href="data/exercise1_data.txt">Download the sample text</a> and paste it into Regex101.</li>
 <li>Write a regular expression that matches all of the citations in the sample text. Use grouping to ensure you match only the citations themselves, without any surrounding characters.</li>
 </ul>
-
-<p>This activity will require you to use the techniques we have practiced already, and also to explore and try out a few new ones described in the metacharacter table above, including some handy shorthand character classes such as \s.</p>
 
 <h2 id="toc_15">Exercise 2</h2>
 
