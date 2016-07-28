@@ -26,7 +26,7 @@ Basic syntax rules
 * XML attribute values must be quoted, e.g.
 ``` <catfood type="basic"></catfood> ```
 
-XPath is written using expressions, and when these expressions are evaluated on XML documents they produce an object. XPath is typically used to select nodes and compare nodes, but you can't manipulate or edit nodes. For that you would want to use something like XQuery.
+XPath is written using expressions, and when these expressions are evaluated on XML documents they produce an object. XPath is typically used to select nodes and compare nodes, but if you want manipulate or edit nodes you would want to use something like XQuery.
 
 You're not querying raw text or just data values like you would in regex. Instead, XPath recognizes that there is a node structure to your document, which allows you to do searches on those nodes that tell you something about your data.
 
@@ -48,13 +48,15 @@ In this scenario, we received an XML export the most popular books in our system
 3. Browse to your `xpath-xquery` directory, click on the `data-books` directory then select Choose. Hit OK.
 4. Set the input bar option to XQuery and use that to enter in your XPath expressions
 
-BASEX IS...ADD MORE INFO
+BaseX is an XML database engine that allows you to work with XML documents. You can work with it from the command line, but it also provides a simple GUI.
 
-* Editor
-* Result
-* Query Info
-* Visualizations: Tree
-* Input Bar
+It implements XQuery 3.1/XPath 2.0 according to the W3C standard. That means we can work with XML fragments, XML files, or databases of XML documents by using XPath and XQuery. BaseX also provides visualizations, simple search and its own set of [commands](http://docs.basex.org/wiki/Commands) which won't be covered in this lesson.
+
+* Input Bar: where you can input your XPath expressions or XQuery queries in a single line
+* Editor: write and edit XQuery code, XML
+* Result: query result window
+* Query Info: processing information from your XPath/XQuery statements
+* Tree View: provides a tree visualization of your XML document
 
 Looking at `xpath-xquery/data-books/books.xml`:**
 
@@ -192,13 +194,17 @@ Looking at `xpath-xquery/data-books/books.xml`:**
 
 In BaseX, bring up the tree visualization of your document.
 
-XPath represents xml as a tree data structure. Here are some common terminologies to describe the different parts of the XML document tree:
+XPath understands XML as a tree data structure. XPath expressions are written in a way that represents searching and traversing through this tree. In other words, a node is selected by following a path or a number of steps to get to that node.
+
+![XML Node Tree](http://www.w3schools.com/xml/nodetree.gif)
+
+Here are some common terminologies to describe the different parts of the XML document tree:
 
 **node** - A node is a unit in the document. A node can be an element node, an attribute node, a text node.
 
 **element** - XML trees are composed of connected XML elements in a hierarchy = nodes of the tree. An XML element is everything from (including) the element's start tag to (including) the element's end tag.
 
-**level** - a level represents a hierahical connection from one node to another
+**level** - a level represents a hierarchical connection from one node to another
 
 **path** - the sequence of connections from node to node
 
@@ -210,8 +216,7 @@ XPath represents xml as a tree data structure. Here are some common terminologie
 
 **sibling** - nodes with same parent (same level as current node)
 
-XPath uses path expressions to select nodes in an XML document. The node is selected by following a path or steps. XPath uses the slash to denote traversal of the structure of your document in a path, in the same way as URLs or unix directories.
-
+XPath uses the slash to denote traversal of the structure of your document in a path, in the same way as URLs or unix directories.
 
 ## Abbreviated Syntax
 
@@ -251,11 +256,9 @@ Now you try XPath using a different context. In BaseX, if you go to the tree vie
 || Select the author node|
 || Select the author node irregardless of context - the absolute path|
 
-1. talk about the difference between relative and absolute paths then show them an example using tree view
-
 ## Operators
 
-Operators are .... ADD MORE INFO
+Operators are used to compare nodes. There are mathematical operators, boolean operators. Here are some useful ones:
 
 | Operator   | Explanation |
 |-----------------|:-------------|
@@ -312,6 +315,7 @@ This is because != indicates the existence of an @id, whie the not() expression 
 | Expression   | Result |
 |-----------------|:-------------|
 ||I want to see the categories of all of the books but also the publish date.|
+||Select books that are either romance or fiction and are less than ten dollars. Hint: use `and` and `or`|
 
 ## Predicates
 
@@ -365,7 +369,7 @@ In the table below we have listed some path expressions and the result of the ex
 
 ## In-text search
 
-XPath can do in-text searching and also supports regex with its matches() function. Note: in-text searching is case-sensitive!
+XPath can do in-text searching using functions and also supports regex with its matches() function. Note: in-text searching is case-sensitive!
 
 |Path Expression|	Result|
 |-----------------|:-------------|
@@ -395,7 +399,7 @@ Now try XPath with `xpath-xquery/data-menu/menu.xml`
 
 ## Complete syntax: XPath Axes
 
-XPath Axes are .... ADD MORE INFO
+XPath Axes fuller syntax of how to use XPath. Provides all of the different ways to specify the path by describing more fully the relationships between nodes and their connections. The XPath specification describes 13 different axes:
 
 * self ‐‐ the context node itself
 * child ‐‐ the children of the context node
@@ -431,17 +435,38 @@ Below are a few examples of how XQuery can be used:
 * Cleaning XML data
 * Publishing data from databases onto the web or in applications
 
+## Functions
+We've been using functions like contains, matches. For simplicity, BaseX hides the complete query but we were using the fn:doc function everytime we were querying a document!
+
+A function is an action or set of actions that you can reuse. In XPath/XQuery, a function takes in a parameter or set of parameters to bring back a new result.
+
+Functions on strings and numeric types, recognize dates and can do comparisons. For a list of functions, visit the [W3C Function specification.](https://www.w3.org/TR/xpath-functions/#func-replace)
+
+Some useful string functions:
+
+* fn:replace('query', 'input', 'replacementvalue')
+* fn:upper-case('query')
+* fn:lower-case('query')
+* fn:normalize-space('query')
+
+It's also possible to write your own reusable functions!
+
 ## FLWOR statements
+
+XQuery statements are written with FLWOR clauses. If you are familiar with SQL, you structure your queries using clauses like SELECT, FROM, WHERE clauses and similarly can be used to join documents.
 
 **For** - the 'for' clause basically states: "for every item in a set of items, do something."
 
 The 'for' clause in XQuery iteratively assigns a variable to every item in a set of items selected using XPath.
 
-e.g.
+e.g. if you were to copy and paste this query into the Editor window:
+
 ```
 for $titleitem in fn:doc("books.xml")/catalog/book/title
 return $titleitem
 ```
+
+You would get all of the titles of each book back.
 
 **Let** - the 'let' clause basically declares a value without iteration. In XQuery, you assign a single result to a variable using let, which can be a single value, element or a whole set of elements. Your subsequent statements will act on an aggregate set of items.
 
@@ -503,20 +528,30 @@ order by $title
 return<object><id>{$author}</id><title>{$title}</title></object> }</report>
 ```
 
+## Querying Databases
+
+Up until now we've been querying single documents, but XPath and XQuery lets you query multiple documents using fn:collection("databasename") or in BaseX you can just use collection("databasename"). To specify a single document use fn:doc("file") or in a database in BaseX use db:open("database", "file").
+
+XPath example:
+```
+fn:collection("data-collection-plants")/CATALOG/PLANT/COMMON
+```
 
 ## XQuery Update
 
 XQuery has an extension called [XQuery Update Facility](https://www.w3.org/TR/xquery-update-10/)
 
-The XQuery Update Facility provides five basic operations acting upon XML nodes:
+In SQL there is the UPDATE clause which is used to update records in a table. In XQuery, the XQuery Update Facility (XQUF) provides five basic operations acting upon XML nodes:
 
-* insert one or several nodes inside/after/before a specified node
-* delete one or several nodes
-* replace a node (and all its descendants if it is an element) by a sequence of nodes.
-* replace the contents (children) of a node with a sequence of nodes, or the value of a node with a string value.
-* rename a node (applicable to elements, attributes and processing instructions) without affecting its contents or attributes.
+* **insert node:** insert one or several nodes inside/after/before a specified node
+* **delete node:** delete one or several nodes
+* **replace node:** replace a node (and all its descendants if it is an element) by a sequence of nodes.
+* **replace value of node:** replace the contents (children) of a node with a sequence of nodes, or the value of a node with a string value.
+* **rename node:** rename a node (applicable to elements, attributes and processing instructions) without affecting its contents or attributes.
 
-BaseX has a [complete implementation](http://docs.basex.org/wiki/XQuery_Update) of the XQuery Update specification.
+BaseX has a [complete implementation](http://docs.basex.org/wiki/XQuery_Update) of the XQuery Update specification that you'll want to take a look at to structure your queries.
+
+### Example
 
 Running
 
@@ -526,6 +561,25 @@ return insert node $zonenode after $zonenode
 ```
 
 Will find the nodes that match the xpath expression `//ZONE`, then insert an identical <ZONE /> node wherever that node occurs in the document.
+
+### Exercises
+
+* Rename the AVAILABILITY node to SERIALNO in the entire plant database.
+
+```
+for $availability in fn:collection(data-collection-plants)//AVAILABILITY
+return rename node $availability as 'SERIALNO'
+```
+
+* Replace all occurrences of the word leaf with leaves in the entire plant database.
+
+```
+for $text in fn:collection(data-collection-plants)//text()
+return replace value of node $text with fn:replace($text, "leaf", "leaves")
+```
+### Non-updating functions
+
+There's also copy, modify, return. BaseX also has its own update function.
 
 # Reference
 
