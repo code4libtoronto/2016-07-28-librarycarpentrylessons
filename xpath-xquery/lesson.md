@@ -7,11 +7,11 @@ XPath (which stands for XML Path Language) is an expression language used to spe
 
 In case you don't know what XML is, XML is a markup language. This means that it uses a set of tags or rules that provide information about its data. This structure helps to automate processing, editing, formatting, display, printing.
 
-XML documents stores data in plain text format. This provides a software- and hardware-independent way of storing, transporting, and sharing data. This allows for exchange between incompatible systems and easier conversion of data.
+XML documents stores data in plain text format. This provides a software- and hardware-independent way of storing, transporting, and sharing data. XML format is an open format, meant to be software agnostic -  open in something like notepad and shows data as it is meant to be represented. This allows for exchange between incompatible systems and easier conversion of data.
 
 Basic syntax rules
 * An XML document is structured using nodes, which include element nodes, attribute nodes and text nodes
-* XML elements must have an opening and closing tag, e.g. `<catfood> ` opening tag and ` </catfood>` closing tag
+* XML element nodes must have an opening and closing tag, e.g. `<catfood> ` opening tag and ` </catfood>` closing tag
 * XML tags are case sensitive, e.g. ` <catfood>` does not equal ` <catFood> `
 * XML elements must be properly nested:
 
@@ -23,7 +23,7 @@ Basic syntax rules
 </catfood>
 ```
 * Text nodes (data) are contained inside the opening and closing tags
-* XML attribute values must be quoted, e.g.
+* XML attribute nodes contain values that must be quoted, e.g.
 ``` <catfood type="basic"></catfood> ```
 
 XPath is written using expressions, and when these expressions are evaluated on XML documents they produce an object. XPath is typically used to select nodes and compare nodes, but if you want manipulate or edit nodes you would want to use something like XQuery.
@@ -41,7 +41,7 @@ In this scenario, we received an XML export the most popular books in our system
 ### Loading data in BaseX
 
 1. If you've installed BaseX successfully, open your Terminal or command prompt and run BaseX by typing
-    ```bash
+    ```
     $ basexgui
     ```
 2. Create a new database by going into Database > New
@@ -50,12 +50,14 @@ In this scenario, we received an XML export the most popular books in our system
 
 BaseX is an XML database engine that allows you to work with XML documents. You can work with it from the command line, but it also provides a simple GUI.
 
-It implements XQuery 3.1/XPath 2.0 according to the W3C standard. That means we can work with XML fragments, XML files, or databases of XML documents by using XPath and XQuery. BaseX also provides visualizations, simple search and its own set of [commands](http://docs.basex.org/wiki/Commands) which won't be covered in this lesson.
+It implements XQuery 3.1/XPath 2.0 according to the W3C standard. The syntax and functions specified by the consortium can be used in BaseX.
+
+That means we can work with XML fragments, XML files, or databases of XML documents by using XPath and XQuery. BaseX also provides visualizations, simple search and its own set of [commands](http://docs.basex.org/wiki/Commands) which won't be covered in this lesson.
 
 * Input Bar: where you can input your XPath expressions or XQuery queries in a single line
 * Editor: write and edit XQuery code, XML
 * Result: query result window
-* Query Info: processing information from your XPath/XQuery statements
+* Query Info: processing information when you run your XPath/XQuery statements - used to troubleshoot errors and provide runtime statistics
 * Tree View: provides a tree visualization of your XML document
 
 Looking at `xpath-xquery/data-books/books.xml`:**
@@ -192,9 +194,9 @@ Looking at `xpath-xquery/data-books/books.xml`:**
 
 ## Selecting Nodes
 
-In BaseX, bring up the tree visualization of your document.
+In BaseX, bring up the tree visualization of your document to explore the tree and hover over your nodes.
 
-XPath understands XML as a tree data structure. XPath expressions are written in a way that represents searching and traversing through this tree. In other words, a node is selected by following a path or a number of steps to get to that node.
+XPath understands XML as a tree data structure. XPath expressions are written in a way that represents searching and traversing through this tree. In other words, to select a node in XPath, you write the expression as if you are following a path or a number of steps to get to that node.
 
 ![XML Node Tree](http://www.w3schools.com/xml/nodetree.gif)
 
@@ -216,20 +218,20 @@ Here are some common terminologies to describe the different parts of the XML do
 
 **sibling** - nodes with same parent (same level as current node)
 
-XPath uses the slash to denote traversal of the structure of your document in a path, in the same way as URLs or unix directories.
-
 ## Abbreviated Syntax
 
-In XPath, all of your expressions are evaluated based on a context. The default context is your root node, indicated by a slash (/).
+XPath uses the slash (/shell/fruit/seed) to denote traversal of the structure of your document in a path, in the same way as URLs or unix directories.
+
+In XPath, all of your expressions are evaluated based on a context node. The context node is the node that you're starting your path expression from. The default context is your root node, indicated by a single slash (/).
 
 The most useful path expressions are listed below:
 
 | Expression   | Description |
 |-----------------|:-------------|
 | ```nodename```| Select all nodes with the name "nodename"   |
-| ```/```  | Select from the root node, subsequent slashes indicate selecting a child node from current node  |
+| ```/```  | A beginning single slash indicates a select from the root node, subsequent slashes indicate selecting a child node from current node  |
 | ```//``` | Select direct and indirect child nodes in the document from the current node - this gives you the ability to "skip levels" |
-| ```.```       | Select the context node, the context node being the current node you're starting your path expression from   |
+| ```.```       | Select the current context node   |
 |```..```  | Select the parent of the context node|
 |```@```   |Select attributes|
 
@@ -239,10 +241,10 @@ The most useful path expressions are listed below:
 | Path Expression   | Expression Result |
 |-----------------|:-------------|
 |```catalog```|	Select all nodes with the name "catalog"|
-|```/catalog```|	Select the root element catalog. Note: If the path starts with a slash ( / ) it always represents an absolute path to an element!|
+|```/catalog```|	Select the root element catalog. Note: If the path starts with a slash ( / ) it always represents an absolute path to an element! Your absolute path is the same as your context in this case.|
 |```//author```| Select all nodes with the name "author"|
 |```//author/..``` |Selects all of the parents of the nodes with the name "author"|
-|```/catalog/book[@id="bk101"]```|Select book nodes where the id attribute corresponds to "bk101"|
+|```/catalog/book/@id```|Select all book node id attributes|
 
 
 ### Exercises
@@ -254,7 +256,9 @@ Now you try XPath using a different context. In BaseX, if you go to the tree vie
 |  | Select the context book node|
 | | Select the context's parent node|
 || Select the author node|
-|| Select the author node irregardless of context - the absolute path|
+|| Another way to select the author node |
+
+Why doesn't /author work? Did you figure out how to select the author node irregardless of context - the absolute path?
 
 ## Operators
 
@@ -265,8 +269,8 @@ Operators are used to compare nodes. There are mathematical operators, boolean o
 | &#124;|Pipe chains expressions and brings back results from either expression |
 |```=```|Equivalent comparison, can be used for numeric or text values|
 |```!=```|Is not equivalent comparison|
-|```<, <=```|Greater than, greater than or equal to|
-|```>, >=```|Less than, less than or equal to|
+|```>, >=```|Greater than, greater than or equal to|
+|```<, <=```|Less than, less than or equal to|
 |```or```|Boolean or|
 |```and```|Boolean and|
 |```not```|Boolean not|
@@ -281,14 +285,14 @@ Note: '!=' != 'not', for instance in this snippet
 <book id='bk103'></book>
 ```
 
-The expression ```@id != 'bk101'``` will bring back
+The ```@id != 'bk101'``` will bring back
 
 ```xml
 <book id='bk102'></book>
 <book id='bk103'></book>
 ```
 
-While the expression ```not(@id='bk101')``` will bring back
+While ```not(@id='bk101')``` will bring back
 
 ```xml
 <book></book>
@@ -303,27 +307,25 @@ This is because != indicates the existence of an @id, whie the not() expression 
 
 | Path Expression   | Expression Result |
 |-----------------|:-------------|
-|```/catalog/book```|	Select all book nodes that are children of catalog|
-|```//book```|	Select all book nodes no matter where they are in the document|
-|```/catalog//book```	| Select all book nodes that are descendant of the catalog nodes, no matter where they are under the catalog nodes|
-|```//@lang```|	Select all attributes that are named lang|
-|```/catalog/book[not(@id="bk101")]```|Select all book nodes except for the book that has an id "bk101"|
+|`/catalog/book/@category="WESTERN"`|Are any of the bestselling books Westerns (category WESTERN)?|
+|`/catalog/book/price>80`|Are there any books over $80?|
 
 
 ### Exercises
 
 | Expression   | Result |
 |-----------------|:-------------|
-||I want to see the categories of all of the books but also the publish date.|
-||Select books that are either romance or fiction and are less than ten dollars. Hint: use `and` and `or`|
+||Are any of the bestselling books Sci-Fi (category SCIFI)?|
+||Are there any books in the Computer genre that are over $50?|
+||I want to see the categories of all of the books but also the publish date. Hint: use the pipe|
 
 ## Predicates
 
 Predicates are used to find a specific node or a node that contains a specific value.
 
-Predicates are always embedded in square brackets, and are meant to provide additional filtering information on a node in an expression.
+Predicates are always embedded in square brackets, and are meant to provide additional filtering information to bring back nodes. You can filter on a node by using operators or functions.
 
-In the table below we have listed some path expressions with predicates and the result of the expressions:
+### Examples
 
 | Expression   | Result |
 |-----------------|:-------------|
@@ -347,7 +349,7 @@ XPath wildcards can be used to select unknown XML nodes.
 |```node()```|	Matches any node of any kind|
 
 
-In the table below we have listed some path expressions and the result of the expressions:
+### Examples
 
 |Path Expression|	Result|
 |-----------------|:-------------|
@@ -362,9 +364,13 @@ In the table below we have listed some path expressions and the result of the ex
 |-----------------|:-------------|
 |   ```//@*```    |What do you expect as your result?|
 |  |For all nodes that have the language attribute, select the immediate parent|
+||Select book nodes where the id attribute corresponds to "bk101"|
+||Select books that are either romance or fiction and are less than ten dollars. Hint: use `and` and `or`|
 ||Select all the title elements of the book elements of the catalog element that have a price element with a value greater than 15.00|
 |```//title[@lang!="en"]```|What do you expect as your result?|
+|```//title[not(@lang="en")]```|What do you expect as your result?|
 |```/catalog/book[title[not(@lang='en')]][position()<4]/author/text()```|What do you expect as your result?|
+
 
 
 ## In-text search
