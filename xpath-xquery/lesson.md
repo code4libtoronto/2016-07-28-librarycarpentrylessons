@@ -60,7 +60,7 @@ That means we can work with XML fragments, XML files, or databases of XML docume
 * Query Info: processing information when you run your XPath/XQuery statements - used to troubleshoot errors and provide runtime statistics
 * Tree View: provides a tree visualization of your XML document
 
-Looking at `xpath-xquery/data-books/books.xml`:**
+Looking at `xpath-xquery/data-books/books.xml`:
 
 ```xml
 <?xml version="1.0"?>
@@ -463,7 +463,7 @@ It's also possible to write your own reusable functions!
 
 XQuery statements are written with FLWOR clauses. If you are familiar with SQL, you structure your queries using clauses like SELECT, FROM, WHERE clauses and similarly can be used to join documents. In XQuery:
 
-`:=` indicates creation of a variable and assignment
+`:=` indicates creation of a variable creation and variable assignment in one fell swoop
 
 **For** - the 'for' clause basically states: "for every item in a set of items, do something."
 
@@ -484,6 +484,7 @@ e.g.
 
 ```
 let $cost := 300
+return $cost
 ```
 
 e.g.
@@ -574,9 +575,9 @@ Will find the nodes that match the xpath expression `//ZONE`, then insert an ide
 
 ### Exercises
 
-* In /data-menu-xquery, clean up the prices so you can perform operations on those nodes as numeric values
+* In `/data-menu-xquery`, clean up the prices so you can perform operations on those nodes as numeric values
 ```
-for $text in db:open("data-menu-xquery","menu.xml")/breakfast_menu/food/price
+for $text in db:open("data-menu-xquery","menuprices.xml")/breakfast_menu/food/price
 return replace value of node $text with fn:replace($text, "\$", "")
 ```
 
