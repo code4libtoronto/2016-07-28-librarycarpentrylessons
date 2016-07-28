@@ -3,13 +3,14 @@
 # XPath
 ## Introduction
 
-XPath (which stands for XML Path Language) is an expression language used to specify parts of an XML document, which is designed to be used by XML tooling languages such as XSLT or XQuery. XPath used in other DOM structures like HTML.
+XPath (which stands for XML Path Language) is an expression language used to specify parts of an XML document, which is designed to be used by XML tooling languages such as XSLT or XQuery. XPath can also be used documents with similar structures to XML, like HTML.
 
-In case you don't know what XML is, XML is a markup language. This means that it uses a set of tags or rules that provide information about its data. This structure helps to automate processing, editing, formatting, display, printing. It allows for exchange between incompatible systems and easier conversion of data.
+In case you don't know what XML is, XML is a markup language. This means that it uses a set of tags or rules that provide information about its data. This structure helps to automate processing, editing, formatting, display, printing.
 
-XML documents stores data in plain text format. This provides a software- and hardware-independent way of storing, transporting, and sharing data.
+XML documents stores data in plain text format. This provides a software- and hardware-independent way of storing, transporting, and sharing data. This allows for exchange between incompatible systems and easier conversion of data.
 
 Basic syntax rules
+* An XML document is structured using nodes, which include element nodes, attribute nodes and text nodes
 * XML elements must have an opening and closing tag, e.g. `<catfood> ` opening tag and ` </catfood>` closing tag
 * XML tags are case sensitive, e.g. ` <catfood>` does not equal ` <catFood> `
 * XML elements must be properly nested:
@@ -21,20 +22,21 @@ Basic syntax rules
   <date>2019-10-01</date>
 </catfood>
 ```
-
+* Text nodes (data) are contained inside the opening and closing tags
 * XML attribute values must be quoted, e.g.
 ``` <catfood type="basic"></catfood> ```
 
-XPath is written using expressions, and when these expressions are evaluated on XML documents they produce an object. XPath is typically used to select nodes, compare nodes, ?but technically you can't produce a node or list of nodes?. For that you would want to use something like XQuery.
+XPath is written using expressions, and when these expressions are evaluated on XML documents they produce an object. XPath is typically used to select nodes and compare nodes, but you can't manipulate or edit nodes. For that you would want to use something like XQuery.
 
-So unlike regex, you're usually not doing searches on text (though it is possible). Instead, if you have structured documents like these you're doing searches on nodes that tell you about your data. It's basically like doing a search on metadata and seeing the data results you get back.
+You're not querying raw text or just data values like you would in regex. Instead, XPath recognizes that there is a node structure to your document, which allows you to do searches on those nodes that tell you something about your data.
+
+Think of using XPath as a way to do an advanced search like you would in a library catalogue. You can do a search on specific metadata fields by specifying them and then you can see the data results you get back. The benefit of this is that you don't have to know what your data looks like in order to get results back, you just have to know what kind of data you're looking for.
 
 Now, lets begin to use XPath.
 
-
 ## Practice
 
-We have an export of our data of recent book purchases
+In this scenario, we received an XML export the most popular books in our system and we want to learn more about these books because it will help inform future purchases.
 
 ### Loading data in BaseX
 
@@ -190,9 +192,11 @@ Looking at `xpath-xquery/data-books/books.xml`:**
 
 In BaseX, bring up the tree visualization of your document.
 
-XPath represents xml as a tree data structure. Here are some common terminologies to describe elements of the XML document tree:
+XPath represents xml as a tree data structure. Here are some common terminologies to describe the different parts of the XML document tree:
 
-**node** - XML trees are composed of connected XML elements in a hierarchy = nodes of the tree. Note: Nodes and elements are used interchangeably in this lesson.
+**node** - A node is a unit in the document. A node can be an element node, an attribute node, a text node.
+
+**element** - XML trees are composed of connected XML elements in a hierarchy = nodes of the tree. An XML element is everything from (including) the element's start tag to (including) the element's end tag.
 
 **level** - a level represents a hierahical connection from one node to another
 
@@ -296,11 +300,11 @@ This is because != indicates the existence of an @id, whie the not() expression 
 
 | Path Expression   | Expression Result |
 |-----------------|:-------------|
-|```/catalog/book```|	Select all book elements that are children of catalog|
-|```//book```|	Select all book elements no matter where they are in the document|
-|```/catalog//book```	| Select all book elements that are descendant of the catalog element, no matter where they are under the catalog element|
+|```/catalog/book```|	Select all book nodes that are children of catalog|
+|```//book```|	Select all book nodes no matter where they are in the document|
+|```/catalog//book```	| Select all book nodes that are descendant of the catalog nodes, no matter where they are under the catalog nodes|
 |```//@lang```|	Select all attributes that are named lang|
-|```/catalog/book[not(@id="bk101")]```|Select all book elements except for the book that has an id "bk101"|
+|```/catalog/book[not(@id="bk101")]```|Select all book nodes except for the book that has an id "bk101"|
 
 
 ### Exercises
@@ -319,13 +323,13 @@ In the table below we have listed some path expressions with predicates and the 
 
 | Expression   | Result |
 |-----------------|:-------------|
-| ```[1]```  |Select the first element|
-| ```[last()]```  |Select the last element|
-| ```[last()-1]```  |Select the last but one element (also known as the second last element)|
-|```[position()<3]```|Select the first two elements, note the first position starts at 1, not = |
-|```[@lang]```|	Select elements that have attribute 'lang'|
-|```[@lang='en']```|	Select all the elements that have a "attribute" attribute with a value of "en"|
-|```[price>15.00]```|	Select all elements that have a price element with a value greater than 15.00|
+| ```[1]```  |Select the first node|
+| ```[last()]```  |Select the last node|
+| ```[last()-1]```  |Select the last but one node (also known as the second last node)|
+|```[position()<3]```|Select the first two nodes, note the first position starts at 1, not = |
+|```[@lang]```|	Select nodes that have attribute 'lang'|
+|```[@lang='en']```|	Select all the nodes that have a "attribute" attribute with a value of "en"|
+|```[price>15.00]```|	Select all nodes that have a price node with a value greater than 15.00|
 
 What other values can you use on text in xml? you can see numbers, text, booleans
 
