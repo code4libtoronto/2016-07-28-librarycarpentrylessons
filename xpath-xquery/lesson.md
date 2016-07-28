@@ -235,7 +235,7 @@ The most useful path expressions are listed below:
 |```..```  | Select the parent of the context node|
 |```@```   |Select attributes|
 |`text()`| Select the value of an element|
-| &#124;|Pipe chains expressions and brings back results from either expression |
+| &#124;|Pipe chains expressions and brings back results from either expression, think of a set union |
 
 
 ### Examples
@@ -280,7 +280,7 @@ Operators are used to compare nodes. There are mathematical operators, boolean o
 
 | Path Expression   | Expression Result |
 |-----------------|:-------------|
-|`/catalog/book/@category="WESTERN"`|Are any of the bestselling books Westerns (category WESTERN)?|
+|`/catalog/book/@category="WESTERN"`|Are any of the most popular books Westerns (category WESTERN)?|
 |`/catalog/book/price>80`|Are there any books over $80?|
 
 
@@ -288,7 +288,7 @@ Operators are used to compare nodes. There are mathematical operators, boolean o
 
 | Expression   | Result |
 |-----------------|:-------------|
-||Are any of the bestselling books Sci-Fi (category SCIFI)?|
+||Are any of the most popular books Sci-Fi (category SCIFI)?|
 ||Are there any books in the Computer genre that are over $10 but under $50?|
 ||I want to see the categories of all of the books but also the publish date. Hint: use the pipe|
 
@@ -339,7 +339,7 @@ While ```[not(@id='bk101')]``` will bring back
 This is because != indicates the existence of an @id, whie the not() expression expresses to bring back everything except @id='bk101'
 
 
-##wildcards
+##Wildcards
 
 XPath wildcards can be used to select unknown XML nodes.
 
@@ -452,7 +452,7 @@ Functions on strings and numeric types, recognize dates and can do comparisons. 
 
 Some useful string functions:
 
-* fn:replace('query', 'input', 'replacementvalue') - also can use regex
+* fn:replace('query', 'input', 'replacementvalue') - can use regex with this function
 * fn:upper-case('query')
 * fn:lower-case('query')
 * fn:normalize-space('query')
@@ -523,6 +523,8 @@ return $title
 
 **Return** - the 'return' clause will bring back specified the nodes
 
+You can use as many for and let statements as you want and in any order.
+
 
 ### Exercises
 
@@ -550,7 +552,7 @@ fn:collection("data-collection-plants")/CATALOG/PLANT/COMMON
 
 ## XQuery Update
 
-XQuery has an extension called [XQuery Update Facility](https://www.w3.org/TR/xquery-update-10/)
+XQuery has an extension called [XQuery Update Facility](https://www.w3.org/TR/xquery-update-10/) that lets you directly modify the current XML document or database that you're working with.
 
 In SQL there is the UPDATE clause which is used to update records in a table. In XQuery, the XQuery Update Facility (XQUF) provides five basic operations acting upon XML nodes:
 
@@ -560,7 +562,7 @@ In SQL there is the UPDATE clause which is used to update records in a table. In
 * **replace value of node:** replace the contents (children) of a node with a sequence of nodes, or the value of a node with a string value.
 * **rename node:** rename a node (applicable to elements, attributes and processing instructions) without affecting its contents or attributes.
 
-BaseX has a [complete implementation](http://docs.basex.org/wiki/XQuery_Update) of the XQuery Update specification that you'll want to take a look at to structure your queries.
+BaseX has a [complete implementation](http://docs.basex.org/wiki/XQuery_Update) of the XQuery Update specification that you'll want to take a look at to structure your queries. When you run these queries, they are not automatically saved unless you do so yourself. Nevertheless, it is still important to back up your work!
 
 ### Example
 
@@ -591,9 +593,13 @@ return rename node $availability as 'SERIALNO'
 * Replace all occurrences of the word leaf with leaves in the entire plant database.
 
 ```
-for $text in fn:collection(data-collection-plants)//text()
-return replace value of node $text with fn:replace($text, "leaf", "leaves")
+TRY IT OUT!
 ```
+
+### Examples - bringing it all together
+
+
+
 ### Non-updating functions
 
 There's also copy, modify, return. BaseX also has its own update function.
